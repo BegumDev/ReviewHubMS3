@@ -21,13 +21,15 @@
 
 ![Image of the website on desktop, laptop, tablet and mobile]
 
+### This project is a fictational reviews website to enable users to create, read, update and delete their reviews on one platform.
+
 ## User Experience (UX)
 ***
 - ### User stories
     - #### Visitor goals:
-        1. 
-        2. 
-        3. 
+        1. I want to create my own reviews on the website.
+        2. I want to be able to log in and delete any of my reviews.
+        3. I want to be able to receive feedback on my progress when creating or deleting content.
 
 - ### Design
     * #### Color Scheme
@@ -40,22 +42,29 @@
         3. 
 
 - ### Wireframes
-    <details><summary>page wireframe:</summary>
-    
+    <details><summary>Main Page Wireframe:</summary>
+
+    ![Main Page Wireframe](static/images/readme-images/wireframes/main-page-wireframe.JPG)
     </details>
 
-    <details><summary>page wireframe:</summary>
+    <details><summary>My Account Wireframe:</summary>
 
-    </details>
-    <details><summary>page wireframe:</summary>
+    ![My Account Wireframe](static/images/readme-images/wireframes/my-account-wireframe.JPG)
 
     </details>
 
 ## Features
 ***
-
+* ### Current Features
+    1. 
+    2. 
+    3. 
+    
 * ### Future Features
-
+    1. 
+    2. 
+    3. 
+    
         
 ## Technologies Used
 ***
@@ -64,6 +73,8 @@
 * 
 
 ### Frameworks, Libraries & Programs Used
+* 
+
 
 ## Testing
 ***
@@ -75,12 +86,21 @@
     * #### Aim 3
         
 * ### Code validation.
-
+    * 
+    * 
+    * 
 
 * ### Supported screens and browsers.
-
+    * 
+    * 
+    * 
+    
 
 * ### Fixed bugs.
+    * 
+    * 
+    * 
+    
 
 
 ## Deployment
