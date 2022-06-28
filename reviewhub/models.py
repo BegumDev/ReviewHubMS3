@@ -1,12 +1,15 @@
 from reviewhub import db
 
-class Categories(db.Model):
-    # schema for the Categories model
+class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    category_name = db.Column(db.String(50), nullable=False)
+    first_name = db.Column(db.String(50))
+    last_name = db.Column(db.String(50))
+    email = db.Column(db.Text)
+    password = db.Column(db.Text)
 
     def __repr__(self):
         self.id = id
-        self.category_name = category_name
-
-
+        self.first_name = first_name
+        self.last_name = last_name
+        self.email = email
+        self.password = password
