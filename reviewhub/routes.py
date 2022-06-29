@@ -9,7 +9,7 @@ def home():
     return render_template("home.html")
 
 
-# 1. Add a user
+# 1. Register a user
 @app.route("/register", methods=["GET", "POST"])
 def register():
     if request.method == "POST":
@@ -34,6 +34,15 @@ def register():
 
 
 # 2. My account once registered
-@app.route("/my_account")
-def my_account():
-    return render_template('myaccount.html')
+@app.route("/my_account/<username>", methods=["GET", "POST"])
+def my_account(username):
+    if "user" in session:
+        return render_template('myaccount.html', username=session["user"])
+    return redirect(url_for("home"))
+
+
+# 3. Log out of the my account page
+@app.route("/logout")
+def logout():
+    session.pop("user")
+    return redirect(url_for('register'))
