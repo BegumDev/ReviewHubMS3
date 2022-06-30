@@ -21,9 +21,9 @@ def register():
             return redirect(url_for("register"))
         # if not, add them
         user = User(
-            first_name = request.form.get('first_name'),
-            last_name = request.form.get('last_name'),
-            email = request.form.get('email'),
+            first_name = request.form.get('first_name').lower(),
+            last_name = request.form.get('last_name').lower(),
+            email = request.form.get('email').lower(),
             password = generate_password_hash(request.form.get('password')),
         )
         db.session.add(user)
