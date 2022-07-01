@@ -9,6 +9,8 @@
                 <h3>Username: {{ username }}</h3>
             </div>
         </div>
+        <button><a href="{{ url_for('add_review') }}">Add Review</a></button>
+        <button><a href="{{ url_for('my_reviews') }}">My Reviews</a></button>
         <button><a href="{{ url_for('logout') }}">Log out</a></button>
     </div>
 </div>

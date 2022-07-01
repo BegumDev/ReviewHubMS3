@@ -13,3 +13,14 @@ class User(db.Model):
         self.last_name = last_name
         self.email = email
         self.password = password
+
+class Reviews(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    company = db.Column(db.Text)
+    experience = db.Column(db.Text)
+    user_id = db.Column(db.Integer, db.ForeignKey("user.id"))
+
+    def __repr__(self):
+        self.id = id
+        self.company = company
+        self.experience = experience

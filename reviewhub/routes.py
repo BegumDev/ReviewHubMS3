@@ -1,7 +1,7 @@
 from flask import render_template, request, redirect, url_for, session
 from werkzeug.security import generate_password_hash, check_password_hash
 from reviewhub import app, db
-from reviewhub.models import User
+from reviewhub.models import User, Reviews
 
 
 # Display the homepage
@@ -72,3 +72,34 @@ def login():
     return(render_template('login.html'))
 
 
+# Add a review
+@app.route("/add_review", methods=["GET", "POST"])
+def add_review():
+    if request.method == "POST":
+        review = Reviews(
+            company=request.form.get('company_name'),
+            experience=request.form.get('experience'),
+        )
+        db.session.add(review)
+        db.session.commit()
+        return redirect(url_for("home"))
+    return render_template("addreview.html")
+
+
+# See my reviews
+@app.route("/my_reviews")
+def my_reviews():
+    reviews = Reviews.query.all()
+    return render_template("addreview.html", reviews=reviews)
+
+
+# Edit review
+@app.route("/edit_review/<int:review_id>", methods=["GET", "POST"])
+def edit_review(review_id):
+    review = Reviews.query.get_or_404(review_id)
+    if request.method == "POST":
+        review.company = request.form.get("company_name")
+        review.experience = request.form.get("experience")
+        db.session.commit()
+        return redirect(url_for("my_reviews"))
+    return render_template("edit_review.html", review=review)
