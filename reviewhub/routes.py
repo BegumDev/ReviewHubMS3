@@ -82,7 +82,7 @@ def add_review():
         )
         db.session.add(review)
         db.session.commit()
-        return redirect(url_for("home"))
+        return redirect(url_for("my_reviews"))
     return render_template("addreview.html")
 
 
@@ -103,3 +103,12 @@ def edit_review(review_id):
         db.session.commit()
         return redirect(url_for("my_reviews"))
     return render_template("edit_review.html", review=review)
+
+
+# Delete a review
+@app.route("/delete_review/<int:review_id>")
+def delete_review(review_id):
+    review = Reviews.query.get_or_404(review_id)
+    db.session.delete(review)
+    db.session.commit()
+    return redirect(url_for('my_reviews'))
