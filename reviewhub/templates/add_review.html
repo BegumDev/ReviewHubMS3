@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block content %}
+
+<h1>Add a review</h1>
+
+<!-- Add a review -->
+<div class="row">
+    <form class="col m4" action="{{ url_for('add_review') }}" method="POST">
+        <div class="row">
+            <div class="input-field col s12">
+                <input id="company_name" name="company_name" type="text" class="validate" required>
+                <label for="company_name">Company Name</label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="input-field col s12">
+                <textarea id="experience" name="experience" class="materialize-textarea"></textarea>
+                <label for="experience">Comments</label>
+            </div>
+        </div>
+        <button>ADD REVIEW</button>
+        <button><a href="{{ url_for('my_account', username=session['user']) }}">GO BACK</a></button>
+    </form>
+</div>
+
+
+
+{% endblock %}

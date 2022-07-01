@@ -15,16 +15,17 @@ def home():
 def register():
     if request.method == "POST":
         # first check if they already registered
-        existing_user = User.query.filter(User.email == request.form.get("email")).all()
+        existing_user = User.query.filter(
+            User.email == request.form.get("email")).all()
         if existing_user:
             print("user already exists")
             return redirect(url_for("register"))
         # if not, add them
         user = User(
-            first_name = request.form.get('first_name').lower(),
-            last_name = request.form.get('last_name').lower(),
-            email = request.form.get('email').lower(),
-            password = generate_password_hash(request.form.get('password')),
+            first_name=request.form.get('first_name').lower(),
+            last_name=request.form.get('last_name').lower(),
+            email=request.form.get('email').lower(),
+            password=generate_password_hash(request.form.get('password')),
         )
         db.session.add(user)
         db.session.commit()
@@ -38,7 +39,7 @@ def register():
 @app.route("/my_account/<username>", methods=["GET", "POST"])
 def my_account(username):
     if "user" in session:
-        return render_template('myaccount.html', username=session["user"])
+        return render_template('my_account.html', username=session["user"])
     return redirect(url_for("home"))
 
 
@@ -54,13 +55,14 @@ def logout():
 def login():
     # check of the user exists
     if request.method == "POST":
-        existing_user = User.query.filter(User.email == request.form.get("email")).all()
+        existing_user = User.query.filter(
+            User.email == request.form.get("email")).all()
         if existing_user:
             print("existing user found")
             # if they do, check the password
             if check_password_hash(
                 existing_user[0].password, request.form.get("password")
-                ):
+            ):
                 print("password found")
                 session["user"] = request.form.get('email')
                 return redirect(url_for("my_account", username=session["user"]))
@@ -77,20 +79,20 @@ def login():
 def add_review():
     if request.method == "POST":
         review = Reviews(
-            company=request.form.get('company_name'),
-            experience=request.form.get('experience'),
+            company=request.form.get('company_name').lower(),
+            experience=request.form.get('experience').lower(),
         )
         db.session.add(review)
         db.session.commit()
         return redirect(url_for("my_reviews"))
-    return render_template("addreview.html")
+    return render_template("add_review.html")
 
 
 # See my reviews
 @app.route("/my_reviews")
 def my_reviews():
     reviews = Reviews.query.all()
-    return render_template("addreview.html", reviews=reviews)
+    return render_template("my_reviews.html", reviews=reviews)
 
 
 # Edit review
