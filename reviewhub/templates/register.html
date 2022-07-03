@@ -5,19 +5,7 @@
 
 <!-- # Register a user -->
 <div class="row">
-    <form class="col m6" action="{{ url_for('register') }}" method="POST">
-        <div class="row">
-            <div class="input-field col s6">
-                <input id="first_name" name="first_name" type="text" class="validate" required>
-                <label for="first_name">First Name</label>
-            </div>
-        </div>
-        <div class="row">
-            <div class="input-field col s6">
-                <input id="last_name" name="last_name" type="text" class="validate" required>
-                <label for="last_name">Last Name</label>
-            </div>
-        </div>        
+    <form class="col m6" action="{{ url_for('register') }}" method="POST">     
         <div class="row">
             <div class="input-field col s6">
                 <input id="email" name="email" type="email" class="validate" required>

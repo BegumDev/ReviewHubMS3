@@ -1,7 +1,7 @@
 from flask import render_template, request, redirect, url_for, session
 from werkzeug.security import generate_password_hash, check_password_hash
 from reviewhub import app, db
-from reviewhub.models import User, Reviews
+from reviewhub.models import User, Services
 
 
 # Display the homepage
@@ -22,8 +22,6 @@ def register():
             return redirect(url_for("register"))
         # if not, add them
         user = User(
-            first_name=request.form.get('first_name').lower(),
-            last_name=request.form.get('last_name').lower(),
             email=request.form.get('email').lower(),
             password=generate_password_hash(request.form.get('password')),
         )
@@ -75,42 +73,6 @@ def login():
 
 
 # Add a review
-@app.route("/add_review", methods=["GET", "POST"])
-def add_review():
-    if request.method == "POST":
-        review = Reviews(
-            company=request.form.get('company_name').lower(),
-            experience=request.form.get('experience').lower(),
-        )
-        db.session.add(review)
-        db.session.commit()
-        return redirect(url_for("my_reviews"))
-    return render_template("add_review.html")
-
-
 # See my reviews
-@app.route("/my_reviews")
-def my_reviews():
-    reviews = Reviews.query.all()
-    return render_template("my_reviews.html", reviews=reviews)
-
-
 # Edit review
-@app.route("/edit_review/<int:review_id>", methods=["GET", "POST"])
-def edit_review(review_id):
-    review = Reviews.query.get_or_404(review_id)
-    if request.method == "POST":
-        review.company = request.form.get("company_name")
-        review.experience = request.form.get("experience")
-        db.session.commit()
-        return redirect(url_for("my_reviews"))
-    return render_template("edit_review.html", review=review)
-
-
 # Delete a review
-@app.route("/delete_review/<int:review_id>")
-def delete_review(review_id):
-    review = Reviews.query.get_or_404(review_id)
-    db.session.delete(review)
-    db.session.commit()
-    return redirect(url_for('my_reviews'))
