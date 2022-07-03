@@ -10,10 +10,12 @@
                 <h3>Username: {{ username }}</h3>
             </div>
         </div>
-        <button><a href="#">Add Review</a></button>
-        <button><a href="#">My Reviews</a></button>
+        {% if session.user == "admin@gmail.com" %}
+            <button><a href="{{ url_for('admin_page') }}">Admin Page</a></button>
+        {% endif %}
         <button><a href="{{ url_for('logout') }}">Log out</a></button>
     </div>
 </div>
+
 
 {% endblock %}

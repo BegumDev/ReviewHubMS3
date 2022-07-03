@@ -14,8 +14,8 @@ class User(db.Model):
 
 class Services(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    service = db.Column(db.Text)
+    service_name = db.Column(db.Text)
 
     def __repr__(self):
         self.id = id
-        self.service = service
+        self.service_name = service_name

@@ -63,6 +63,8 @@ def login():
             ):
                 print("password found")
                 session["user"] = request.form.get('email')
+                if session["user"] == "admin@gmail.com":
+                    return redirect(url_for('admin_page'))
                 return redirect(url_for("my_account", username=session["user"]))
             else:
                 print("password not found")
@@ -72,7 +74,26 @@ def login():
     return(render_template('login.html'))
 
 
-# Add a review
-# See my reviews
-# Edit review
-# Delete a review
+# Admin page
+@app.route("/admin_page")
+def admin_page():
+    return render_template('admin_page.html')
+
+
+# View services
+@app.route("/view_services")
+def view_services():
+    services = Services.query.all()
+    return render_template("home.html", services=services)
+
+
+# Add a service
+@app.route("/add_service", methods=["GET", "POST"])
+def add_service():
+    if request.method == "POST":
+        service = Services(service_name=request.form.get("service_name"))
+        db.session.add(service)
+        db.session.commit()
+        return redirect(url_for("home"))
+    return render_template("add_service.html")
+
