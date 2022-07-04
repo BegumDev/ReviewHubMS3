@@ -1,23 +1,18 @@
 {% extends "base.html" %}
 {% block content %}
 
-<h1>This is the home page</h1>
+<h1>Reviewhub</h1>
 
 <div class="row">
-    {% for service in services %}
-        <div class="col s3 m3">
-            <div class="card blue-grey darken-1">
-                <div class="card-content white-text">
-                    <span class="card-title"></span>
-                </div>
-                <div class="card-action">
-                    <a href="#">This is a link</a>
-                    <a href="#">This is a link</a>
-                </div>
+    {% for i in name %}
+    <div class="col s12 m6 l3">
+        <div class="card light-blue darken-4 center-align">
+            <div class="card-content white-text">
+                <span class="card-title">{{ i.service_name }}</span>
             </div>
         </div>
+    </div>
     {% endfor %}
 </div>
-
 
 {% endblock %}

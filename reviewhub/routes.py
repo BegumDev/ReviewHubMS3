@@ -3,11 +3,11 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from reviewhub import app, db
 from reviewhub.models import User, Services
 
-
-# Display the homepage
-@app.route("/")
-def home():
-    return render_template("home.html")
+# View services
+@app.route("/view_services")
+def view_services():
+    name = Services.query.all()
+    return render_template("home.html", name=name)
 
 
 # 1. Register a user
@@ -38,7 +38,7 @@ def register():
 def my_account(username):
     if "user" in session:
         return render_template('my_account.html', username=session["user"])
-    return redirect(url_for("home"))
+    return redirect(url_for("view_services"))
 
 
 # 3. Log out of the my account page
@@ -80,13 +80,6 @@ def admin_page():
     return render_template('admin_page.html')
 
 
-# View services
-@app.route("/view_services")
-def view_services():
-    services = Services.query.all()
-    return render_template("home.html", services=services)
-
-
 # Add a service
 @app.route("/add_service", methods=["GET", "POST"])
 def add_service():
@@ -94,6 +87,5 @@ def add_service():
         service = Services(service_name=request.form.get("service_name"))
         db.session.add(service)
         db.session.commit()
-        return redirect(url_for("home"))
+        return redirect(url_for("view_services"))
     return render_template("add_service.html")
-
