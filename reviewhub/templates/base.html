@@ -17,13 +17,12 @@
 
     <nav>
         <div class="nav-wrapper">
-            <a href="{{ url_for('view_services') }}" class="brand-logo">Review Hub</a>
+            <a href="{{ url_for('home') }}" class="brand-logo">Review Hub</a>
             <ul id="nav-mobile" class="right hide-on-med-and-down">
-                <li><a href="{{ url_for('view_services') }}">Home</a></li>
+                <li><a href="{{ url_for('home') }}">Home</a></li>
                 <li><a href="{{ url_for('login')}}">Log in</a></li>
                 <li><a href="{{ url_for('register') }}">Register</a></li>
                 <li><a href="{{ url_for('my_account', username=session['user']) }}">My Account</a></li>
-            </ul>
         </div>
     </nav>
 

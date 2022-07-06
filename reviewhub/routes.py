@@ -3,11 +3,12 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from reviewhub import app, db
 from reviewhub.models import User, Services
 
-# View services
-@app.route("/view_services")
-def view_services():
-    name = Services.query.all()
-    return render_template("home.html", name=name)
+
+# View services on homepage
+@app.route("/")
+def home():
+    service_list = Services.query.all()
+    return render_template("home.html", service_list=service_list)
 
 
 # 1. Register a user
@@ -38,7 +39,7 @@ def register():
 def my_account(username):
     if "user" in session:
         return render_template('my_account.html', username=session["user"])
-    return redirect(url_for("view_services"))
+    return redirect(url_for("home"))
 
 
 # 3. Log out of the my account page
@@ -80,12 +81,24 @@ def admin_page():
     return render_template('admin_page.html')
 
 
-# Add a service
+# 1. Add a service
 @app.route("/add_service", methods=["GET", "POST"])
 def add_service():
     if request.method == "POST":
         service = Services(service_name=request.form.get("service_name"))
         db.session.add(service)
         db.session.commit()
-        return redirect(url_for("view_services"))
+        return redirect(url_for("home"))
     return render_template("add_service.html")
+
+
+# 2. Edit a service
+@app.route("/edit_service/<int:service_id>", methods=["GET", "POST"])
+def edit_service(service_id):
+    change = Services.query.get_or_404(service_id)
+    if request.method == "POST":
+        change.service_name = request.form.get('service_name')
+        db.session.commit()
+        return redirect(url_for('home'))
+    return render_template('edit_services.html', change=change)
+    

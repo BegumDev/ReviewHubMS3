@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block content %}
+
+<h2>Edit a service name</h2>
+
+<form class="col m4" action="{{ url_for('edit_service', service_id=change.id) }}" method="POST">     
+    <div class="row">
+        <div class="input-field col s3">
+            <input id="service_name" name="service_name" type="text" class="validate" value="{{ change.service_name }}" required>
+            <label for="service_name">Service Type</label>
+        </div>
+    </div>
+    <button>Confirm</button>
+</form>
+
+{% endblock %}

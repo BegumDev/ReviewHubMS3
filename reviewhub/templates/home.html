@@ -4,12 +4,18 @@
 <h1>Reviewhub</h1>
 
 <div class="row">
-    {% for i in name %}
+    {% for i in service_list %}
     <div class="col s12 m6 l3">
-        <div class="card light-blue darken-4 center-align">
+        <div class="card light-blue darken-4">
             <div class="card-content white-text">
-                <span class="card-title">{{ i.service_name }}</span>
+                <span class="card-title center-align">{{ i.service_name }}</span>
             </div>
+            {% if session.user == "admin@gmail.com" %}
+            <div class="card-action">
+                <a href="{{ url_for('edit_service', service_id=i.id) }}">EDIT</a>
+                <a href="#">DELETE</a>
+            </div>
+            {% endif %}
         </div>
     </div>
     {% endfor %}
