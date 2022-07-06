@@ -110,4 +110,4 @@ def delete_service(service_id):
     db.session.delete(service)
     db.session.commit()
     return redirect(url_for('home'))
-    return render_template('home.html')    
+    return render_template('home.html')
