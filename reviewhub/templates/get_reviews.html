@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% block content %}
+
+<h1>See Reviews</h1>
+
+<div class="row">
+    {% for i in reviews %}
+        {{ i.review }}
+    {% endfor %}
+</div>
+
+{% endblock %}

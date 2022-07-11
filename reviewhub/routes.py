@@ -1,6 +1,8 @@
 from flask import render_template, request, redirect, url_for, session
+from flask_pymongo import PyMongo
+from bson.objectid import ObjectId
 from werkzeug.security import generate_password_hash, check_password_hash
-from reviewhub import app, db
+from reviewhub import app, db, mongo
 from reviewhub.models import User, Services
 
 
@@ -9,6 +11,13 @@ from reviewhub.models import User, Services
 def home():
     service_list = Services.query.all()
     return render_template("home.html", service_list=service_list)
+
+
+# View reviews
+@app.route("/get_reviews")
+def get_reviews():
+    reviews = mongo.db.reviews.find()
+    return render_template("get_reviews.html", reviews=reviews)
 
 
 # 1. Register a user
