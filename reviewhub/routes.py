@@ -115,14 +115,15 @@ def add_review():
         review = {
             "service_name": request.form.get("service_name"),
             "review": request.form.get("review"),
+            "created_by": session["user"]
         }
         mongo.db.reviews.insert_one(review)
         return redirect(url_for("home"))
     return render_template("add_reviews.html", service_list=service_list)
 
 
-# View broadband reviews
-@app.route("/broadband_review")
-def broadband_review():
+# View reviews
+@app.route("/view_reviews")
+def view_reviews():
     reviews = mongo.db.reviews.find()
-    return render_template('broadband_reviews.html', reviews=reviews)
+    return render_template('view_reviews.html', reviews=reviews)

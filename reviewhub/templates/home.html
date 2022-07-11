@@ -5,7 +5,9 @@
 
 <div class="row">
     <div class="col s12 center-align">
+        {% if session.user %}
         <button><a href="{{ url_for('add_review') }}">ADD REVIEWS</a></button>
+        {% endif %}
         {% if session.user == "admin@gmail.com" %}
         <button><a href="{{ url_for('add_service') }}">ADD A SERVICE</a></button>
         {% endif %}
@@ -30,8 +32,8 @@
     {% endfor %}
 </div>
 
-<div>
-    <button><a href="{{ url_for('broadband_review') }}">BB REVIEWS</a></button>
+<div class="center-align">
+    <button><a href="{{ url_for('view_reviews') }}"> VIEW REVIEWS</a></button>
 </div>
 
 
