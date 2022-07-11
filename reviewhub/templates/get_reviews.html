@@ -4,9 +4,24 @@
 <h1>See Reviews</h1>
 
 <div class="row">
-    {% for i in reviews %}
-        {{ i.review }}
-    {% endfor %}
+
+
+<form class="col m4" action="{{ url_for('add_review') }}" method="POST">     
+    <div class="row">
+        <div class="input-field col s3">
+            <input id="service_name" name="service_name" type="text" class="validate" required>
+            <label for="service_name">Service</label>
+        </div>
+        <div class="input-field col s3">
+            <input id="review" name="review" type="text" class="validate" required>
+            <label for="review">Reviews</label>
+        </div>
+    </div>
+    <button>Submit</button>
+</form>
+
+
+
 </div>
 
 {% endblock %}

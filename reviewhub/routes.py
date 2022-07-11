@@ -13,13 +13,6 @@ def home():
     return render_template("home.html", service_list=service_list)
 
 
-# View reviews
-@app.route("/get_reviews")
-def get_reviews():
-    reviews = mongo.db.reviews.find()
-    return render_template("get_reviews.html", reviews=reviews)
-
-
 # 1. Register a user
 @app.route("/register", methods=["GET", "POST"])
 def register():
@@ -120,3 +113,22 @@ def delete_service(service_id):
     db.session.commit()
     return redirect(url_for('home'))
     return render_template('home.html')
+
+
+# View reviews
+@app.route("/get_reviews")
+def get_reviews():
+    reviews = mongo.db.reviews.find()
+    return render_template("get_reviews.html", reviews=reviews)
+
+
+@app.route("/add_review", methods=["GET", "POST"])
+def add_review():
+    if request.method == "POST":
+        review = {
+            "service_name": request.form.get("service_name"),
+            "review": request.form.get("review"),
+        }
+        mongo.db.tasks.insert_one(review)
+        return redirect(url_for("home"))
+    return render_template("get_reviews.html")
