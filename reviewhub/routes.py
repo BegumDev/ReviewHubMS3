@@ -66,8 +66,6 @@ def login():
             ):
                 print("password found")
                 session["user"] = request.form.get('email')
-                if session["user"] == "admin@gmail.com":
-                    return redirect(url_for('admin_page'))
                 return redirect(url_for("my_account", username=session["user"]))
             else:
                 print("password not found")
@@ -75,12 +73,6 @@ def login():
         else:
             return redirect(url_for('login'))
     return(render_template('login.html'))
-
-
-# Admin page
-@app.route("/admin_page")
-def admin_page():
-    return render_template('admin_page.html')
 
 
 # 1. Add a service
