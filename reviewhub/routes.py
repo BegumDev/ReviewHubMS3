@@ -5,7 +5,8 @@ from reviewhub.models import User, Review, Company
 
 @app.route("/")
 def home():
-    return render_template("reviews.html")
+    reviews = list(Review.query.all())
+    return render_template("reviews.html", reviews=reviews)
 
 
 @app.route("/companies")
@@ -58,3 +59,6 @@ def add_review():
         db.session.commit()
         return redirect(url_for('home'))
     return render_template("add_review.html", companies=companies)
+
+
+# 2. Edit a review
