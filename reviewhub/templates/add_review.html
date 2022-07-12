@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% block content %}
+
+<h1>Add a review</h1>
+
+<!-- Form to add a review -->
+<div class="row">
+    <form class="col s12" action="{{ url_for('add_review') }}" method="POST">
+        <!-- Dropdown selection -->
+        <div class="input-field col s8">
+            <select id="company_id" name="company_id" class="validate" required>
+                <option value="" disabled selected>Choose company</option>
+                {% for company in companies %}
+                <option value="{{ company.id }}">{{ company.company_name }}</option>
+                {% endfor %}
+            </select>
+            <label>Company</label>
+        </div>
+        <!-- review description -->
+        <div class="input-field col s8">
+            <input placeholder="Add a review here" id="description" name="description" type="text" class="validate"
+                    required>
+            <label for="description">Review</label>
+        </div>
+        <div class="row">
+            <div class="input-field col s8">
+                <button type="submit">Add review</button>
+            </div>
+        </div>
+    </form>
+</div>
+
+{% endblock %}

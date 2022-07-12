@@ -1,6 +1,13 @@
 {% extends "base.html" %}
 {% block content %}
 
-<h1>Reviews</h1>
+<h1 class="center-align">Reviews</h1>
+
+<!-- Button for adding a review -->
+<div class="div">
+    <div class="col s12 center-align">
+        <a href="{{ url_for('add_review') }}" class="btn">Add Review</a>
+    </div>
+</div>
 
 {% endblock %}

@@ -43,3 +43,18 @@ def delete_company(company_id):
     db.session.delete(company)
     db.session.commit()
     return redirect(url_for('companies'))
+
+
+# 1. Add a review
+@app.route("/add_review", methods=["GET", "POST"])
+def add_review():
+    companies = list(Company.query.all())
+    if request.method == "POST":
+        review = Review(
+            description=request.form.get('description'),
+            company_id=request.form.get('company_id')
+        )
+        db.session.add(review)
+        db.session.commit()
+        return redirect(url_for('home'))
+    return render_template("add_review.html", companies=companies)
