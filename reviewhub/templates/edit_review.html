@@ -8,23 +8,6 @@
     <form class="col m4" action="{{ url_for('edit_review', review_id=review._id) }}" method="POST">
         <div class="row">
             <div class="input-field col s4">
-                <div class="input-field col s12">
-                    <select id="service_type" name="service_type" class="validate" required>
-                        <option value="" disabled>Choose your service</option>
-                        {% for service in service_list %}
-                            {% if service.service_name == reviews.service_name %}
-                            <option value="{{ service.service_name }}" selected>{{ service.service_name }}</option>
-                            {% else %}
-                            <option value="{{ service.service_name }}">{{ service.service_name }}</option>
-                            {% endif %}
-                        {% endfor %}
-                    </select>
-                    <label for="service_type">Choose a service</label>
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="input-field col s4">
                 <input id="service_name" name="service_name" type="text" class="validate" required>
                 <label for="service_name">Company name</label>
             </div>

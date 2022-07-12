@@ -101,5 +101,6 @@ def edit_review(review_id):
             "review": request.form.get("review"),
             "created_by": session["user"]
         }
-        mongo.db.reviews.update({"_id": ObjectId(review_id)}, review)
+        mongo.db.reviews.replace_one({"_id": ObjectId(review_id)}, review)
+        
     return render_template("edit_review.html", review=review)
