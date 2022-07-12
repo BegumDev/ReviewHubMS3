@@ -40,7 +40,11 @@ def register():
 @app.route("/my_account/<username>", methods=["GET", "POST"])
 def my_account(username):
     if "user" in session:
-        return render_template('my_account.html', username=session["user"])
+    
+        reviews = mongo.db.reviews.find({'created_by': session["user"]})
+
+
+        return render_template('my_account.html', username=session["user"], reviews=reviews)
     return redirect(url_for("home"))
 
 
@@ -112,12 +116,11 @@ def edit_review(review_id):
 # Delete a review
 @app.route("/delete_review/<review_id>")
 def delete_review(review_id):
-
     review = mongo.db.reviews.find_one({"_id": ObjectId(review_id)})
-
     if session["user"] == review["created_by"]:
         mongo.db.reviews.find_one_and_delete({"_id": ObjectId(review_id)}, review)
         return redirect(url_for('home'))
     else:
         flash("You can only delete your own reviews.")
         return redirect(url_for('home'))
+
