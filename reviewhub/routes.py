@@ -1,143 +1,45 @@
-from flask import render_template, request, redirect, url_for, session, flash
-from flask_pymongo import PyMongo
-from bson.objectid import ObjectId
-from werkzeug.security import generate_password_hash, check_password_hash
-from reviewhub import app, db, mongo
-from reviewhub.models import User, Services
+from flask import render_template, url_for, redirect, request, session
+from reviewhub import app, db
+from reviewhub.models import User, Review, Company
 
 
-# View services on homepage
 @app.route("/")
 def home():
-    reviews = list(mongo.db.reviews.find())
-    return render_template('home.html', reviews=reviews)
+    return render_template("reviews.html")
 
 
-# 1. Register a user
-@app.route("/register", methods=["GET", "POST"])
-def register():
+@app.route("/companies")
+def companies():
+    companies = list(Company.query.all())
+    return render_template("companies.html", companies=companies)
+
+
+# 1. Add a company
+@app.route("/add_company", methods=["GET", "POST"])
+def add_company():
     if request.method == "POST":
-        # first check if they already registered
-        existing_user = User.query.filter(
-            User.email == request.form.get("email")).all()
-        if existing_user:
-            print("user already exists")
-            return redirect(url_for("register"))
-        # if not, add them
-        user = User(
-            email=request.form.get('email').lower(),
-            password=generate_password_hash(request.form.get('password')),
-        )
-        db.session.add(user)
+        company = Company(company_name=request.form.get('company_name'))
+        db.session.add(company)
         db.session.commit()
-        # then put user into session cookie
-        session["user"] = request.form.get('email').lower()
-        return redirect(url_for("my_account", username=session["user"]))
-    return render_template('register.html')
+        return redirect(url_for('companies'))
+    return render_template("add_company.html")
 
 
-# 2. My account once registered
-@app.route("/my_account/<username>", methods=["GET", "POST"])
-def my_account(username):
-    if "user" in session:
-        reviews = mongo.db.reviews.find({'created_by': session["user"]})
-        return render_template('my_account.html', username=session["user"], reviews=reviews)
-    return redirect(url_for("home"))
-
-
-# 3. Log out of the my account page
-@app.route("/logout")
-def logout():
-    session.pop("user")
-    flash("Logout successful")
-    return redirect(url_for('home'))
-
-
-# Log in to my account
-@app.route("/login", methods=["GET", "POST"])
-def login():
-    # check of the user exists
+# 2.Edit a company
+@app.route("/edit_company/<int:company_id>", methods=["GET", "POST"])
+def edit_company(company_id):
+    company = Company.query.get_or_404(company_id)
     if request.method == "POST":
-        existing_user = User.query.filter(
-            User.email == request.form.get("email")).all()
-        if existing_user:
-            print("existing user found")
-            # if they do, check the password
-            if check_password_hash(
-                existing_user[0].password, request.form.get("password")
-            ):
-                print("password found")
-                session["user"] = request.form.get('email')
-                return redirect(url_for("my_account", username=session["user"]))
-            else:
-                print("password not found")
-                return redirect(url_for('login'))
-        else:
-            return redirect(url_for('login'))
-    return(render_template('login.html'))
-
-
-# 1. Add a review
-@app.route("/add_review", methods=["GET", "POST"])
-def add_review():
-    if request.method == "POST":
-        review = {
-            "service_name": request.form.get("service_name"),
-            "review": request.form.get("review"),
-            "created_by": session["user"]
-        }
-        mongo.db.reviews.insert_one(review)
-        return redirect(url_for("home"))
-    return render_template("add_reviews.html")
-
-
-# Edit a review
-@app.route("/edit_review/<review_id>", methods=["GET", "POST"])
-def edit_review(review_id):
-    review = mongo.db.reviews.find_one({"_id": ObjectId(review_id)})
-    if session["user"] == review["created_by"]:
-        if request.method == "POST":
-            review = {
-                "service_name": request.form.get("service_name"),
-                "review": request.form.get("review"),
-                "created_by": session["user"]
-            }
-            mongo.db.reviews.replace_one({"_id": ObjectId(review_id)}, review)
-            return redirect(url_for('home'))
-    else:
-        flash("You can only edit your own reviews.")
-        return redirect(url_for('home'))
-    return render_template("edit_review.html", review=review)
-
-
-# Delete a review
-@app.route("/delete_review/<review_id>")
-def delete_review(review_id):
-    review = mongo.db.reviews.find_one({"_id": ObjectId(review_id)})
-    if session["user"] == review["created_by"]:
-        mongo.db.reviews.find_one_and_delete({"_id": ObjectId(review_id)}, review)
-        return redirect(url_for('home'))
-    else:
-        flash("You can only delete your own reviews.")
-        return redirect(url_for('home'))
-
-
-# Edit a user details
-@app.route("/edit_user/<int:user_id>", methods=["GET", "POST"])
-def edit_user(user_id):
-    user = User.query.get_or_404(user_id)
-    if request.method == "POST":
-        user.email = request.form.get('email')
+        company.company_name = request.form.get('company_name')
         db.session.commit()
-        return redirect('home')
-        print(user)
-    return render_template("edit_user.html", user=user)
+        return redirect(url_for('companies'))
+    return render_template('edit_company.html', company=company)
 
 
-# Delete a user
-@app.route("/delete_user/<int:user_id>")
-def delete_user(user_id):
-    user = User.query.get_or_404(user_id)
-    db.session.delete(user)
+# 3. Delete a company
+@app.route("/delete_company/<int:company_id>")
+def delete_company(company_id):
+    company = Company.query.get_or_404(company_id)
+    db.session.delete(company)
     db.session.commit()
-    return redirect(url_for('home'))
+    return redirect(url_for('companies'))

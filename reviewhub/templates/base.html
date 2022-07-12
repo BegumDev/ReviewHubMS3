@@ -20,29 +20,12 @@
             <a href="{{ url_for('home') }}" class="brand-logo">Review Hub</a>
             <ul id="nav-mobile" class="right hide-on-med-and-down">
                 <li><a href="{{ url_for('home') }}">Home</a></li>
-                {% if session.user %}
-                <li><a href="{{ url_for('my_account', username=session['user']) }}">My Account</a></li>
-                <li><a href="{{ url_for('add_review') }}">Add A Review</a></li>
-                <li><a href="{{ url_for('logout')}}">Log Out</a></li>
-                {% else %}
-                <li><a href="{{ url_for('login')}}">Log in</a></li>
-                <li><a href="{{ url_for('register') }}">Register</a></li>
-                {% endif %}
+                <li><a href="{{ url_for('companies') }}">Companies</a></li>
+            </ul>
         </div>
     </nav>
 
     <section>
-
-        <!-- flash messages -->
-        {% with messages = get_flashed_messages() %}
-            {% if messages %}
-                {% for message in messages %}
-                <div class="row flashes">
-                    <h4 class="center-align">{{ message }}</h4>
-                </div>
-                {% endfor %}
-            {% endif %}
-        {% endwith %}
 
         {% block content %}
         {% endblock %}
@@ -57,12 +40,12 @@
                 </div>
                 <div class="col l4 offset-l2 s12">
                     <h5 class="white-text">Links</h5>
-                    <ul>
+                    <!-- <ul>
                         <li><a class="grey-text text-lighten-3" href="#!">Link 1</a></li>
                         <li><a class="grey-text text-lighten-3" href="#!">Link 2</a></li>
                         <li><a class="grey-text text-lighten-3" href="#!">Link 3</a></li>
                         <li><a class="grey-text text-lighten-3" href="#!">Link 4</a></li>
-                    </ul>
+                    </ul> -->
                 </div>
             </div>
         </div>
