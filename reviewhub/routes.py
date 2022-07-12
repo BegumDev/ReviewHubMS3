@@ -1,4 +1,4 @@
-from flask import render_template, request, redirect, url_for, session
+from flask import render_template, request, redirect, url_for, session, flash
 from flask_pymongo import PyMongo
 from bson.objectid import ObjectId
 from werkzeug.security import generate_password_hash, check_password_hash
@@ -92,15 +92,17 @@ def add_review():
 # Edit a review
 @app.route("/edit_review/<review_id>", methods=["GET", "POST"])
 def edit_review(review_id):
-
     review = mongo.db.reviews.find_one({"_id": ObjectId(review_id)})
-
-    if request.method == "POST":
-        review = {
-            "service_name": request.form.get("service_name"),
-            "review": request.form.get("review"),
-            "created_by": session["user"]
-        }
-        mongo.db.reviews.replace_one({"_id": ObjectId(review_id)}, review)
-        
+    if session["user"] == review["created_by"]:
+        if request.method == "POST":
+            review = {
+                "service_name": request.form.get("service_name"),
+                "review": request.form.get("review"),
+                "created_by": session["user"]
+            }
+            mongo.db.reviews.replace_one({"_id": ObjectId(review_id)}, review)
+            return redirect(url_for('home'))
+    else:
+        flash("You can only edit your own reviews.")
+        return redirect(url_for('home'))
     return render_template("edit_review.html", review=review)
