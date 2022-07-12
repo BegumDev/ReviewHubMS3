@@ -106,3 +106,17 @@ def edit_review(review_id):
         flash("You can only edit your own reviews.")
         return redirect(url_for('home'))
     return render_template("edit_review.html", review=review)
+
+
+# Delete a review
+@app.route("/delete_review/<review_id>")
+def delete_review(review_id):
+
+    review = mongo.db.reviews.find_one({"_id": ObjectId(review_id)})
+
+    if session["user"] == review["created_by"]:
+        mongo.db.reviews.find_one_and_delete({"_id": ObjectId(review_id)}, review)
+        return redirect(url_for('home'))
+    else:
+        flash("You can only delete your own reviews.")
+        return redirect(url_for('home'))
