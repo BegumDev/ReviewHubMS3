@@ -85,8 +85,8 @@ def add_review():
             "review": request.form.get("review"),
             "created_by": session["user"]
         }
-        return redirect(url_for("home"))
         mongo.db.reviews.insert_one(review)
+        return redirect(url_for("home"))
     return render_template("add_reviews.html")
 
 
