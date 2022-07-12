@@ -48,7 +48,8 @@ def my_account(username):
 @app.route("/logout")
 def logout():
     session.pop("user")
-    return redirect(url_for('login'))
+    flash("Logout successful")
+    return redirect(url_for('home'))
 
 
 # Log in to my account
@@ -84,8 +85,8 @@ def add_review():
             "review": request.form.get("review"),
             "created_by": session["user"]
         }
-        mongo.db.reviews.insert_one(review)
         return redirect(url_for("home"))
+        mongo.db.reviews.insert_one(review)
     return render_template("add_reviews.html")
 
 
