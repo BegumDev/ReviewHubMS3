@@ -13,7 +13,11 @@
     </div>
 </div>
 
-
+<button><a href="url_for('edit_user', user_id=user.id)">EDIT MY ACCOUNT</a></button>
+<button><a href="url_for('delete_user', user_id=user.id)">DELETE MY ACCOUNT</a></button>
+<br>
+<br>
+<br>
 
 <div class="row center-align review">
     {% for i in reviews %}
@@ -32,11 +36,7 @@
         </div>
     </div>
     {% endfor %}
-
 </div>
-
-<button><a href="{{ url_for('home') }}">HOMEPAGE</a></button>
-<button><a href="#">EDIT MY DETAILS</a></button>
 
 
 

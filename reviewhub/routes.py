@@ -40,10 +40,7 @@ def register():
 @app.route("/my_account/<username>", methods=["GET", "POST"])
 def my_account(username):
     if "user" in session:
-    
         reviews = mongo.db.reviews.find({'created_by': session["user"]})
-
-
         return render_template('my_account.html', username=session["user"], reviews=reviews)
     return redirect(url_for("home"))
 
@@ -124,3 +121,23 @@ def delete_review(review_id):
         flash("You can only delete your own reviews.")
         return redirect(url_for('home'))
 
+
+# Edit a user details
+@app.route("/edit_user/<int:user_id>", methods=["GET", "POST"])
+def edit_user(user_id):
+    user = User.query.get_or_404(user_id)
+    if request.method == "POST":
+        user.email = request.form.get('email')
+        db.session.commit()
+        return redirect('home')
+        print(user)
+    return render_template("edit_user.html", user=user)
+
+
+# Delete a user
+@app.route("/delete_user/<int:user_id>")
+def delete_user(user_id):
+    user = User.query.get_or_404(user_id)
+    db.session.delete(user)
+    db.session.commit()
+    return redirect(url_for('home'))
