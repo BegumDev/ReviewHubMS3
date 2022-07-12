@@ -5,28 +5,15 @@
 
 <!-- Form for adding a review -->
 <div class="row">
-    <form class="col m4" action="{{ url_for('add_review') }}" method="POST">
+    <form class="col m12" action="{{ url_for('add_review') }}" method="POST">
         <div class="row">
-            <div class="input-field col s4">
-                <div class="input-field col s12">
-                    <select id="service_type" name="service_type" class="validate" required>
-                        <option value="" disabled selected>Choose your service</option>
-                        {% for i in service_list %}
-                        <option value="{{ i.service_name }}">{{ i.service_name }}</option>
-                        {% endfor %}
-                    </select>
-                    <label for="service_type">Choose a service</label>
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="input-field col s4">
+            <div class="input-field col s8">
                 <input id="service_name" name="service_name" type="text" class="validate" required>
                 <label for="service_name">Company name</label>
             </div>
         </div>
         <div class="row">
-            <div class="input-field col s4">
+            <div class="input-field col s8">
                 <input id="review" name="review" type="text" class="validate" required>
                 <label for="review">Reviews</label>
             </div>

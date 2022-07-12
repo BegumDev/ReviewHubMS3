@@ -9,8 +9,8 @@ from reviewhub.models import User, Services
 # View services on homepage
 @app.route("/")
 def home():
-    service_list = Services.query.all()
-    return render_template("home.html", service_list=service_list)
+    reviews = list(mongo.db.reviews.find())
+    return render_template('home.html', reviews=reviews)
 
 
 # 1. Register a user
@@ -75,42 +75,9 @@ def login():
     return(render_template('login.html'))
 
 
-# 1. Add a service
-@app.route("/add_service", methods=["GET", "POST"])
-def add_service():
-    if request.method == "POST":
-        service = Services(service_name=request.form.get("service_name"))
-        db.session.add(service)
-        db.session.commit()
-        return redirect(url_for("home"))
-    return render_template("add_service.html")
-
-
-# 2. Edit a service
-@app.route("/edit_service/<int:service_id>", methods=["GET", "POST"])
-def edit_service(service_id):
-    change = Services.query.get_or_404(service_id)
-    if request.method == "POST":
-        change.service_name = request.form.get('service_name')
-        db.session.commit()
-        return redirect(url_for('home'))
-    return render_template('edit_services.html', change=change)
-
-
-# 3. Delete a service
-@app.route("/delete_service/<int:service_id>")
-def delete_service(service_id):
-    service = Services.query.get_or_404(service_id)
-    db.session.delete(service)
-    db.session.commit()
-    return redirect(url_for('home'))
-    return render_template('home.html')
-
-
 # 1. Add a review
 @app.route("/add_review", methods=["GET", "POST"])
 def add_review():
-    service_list = Services.query.all()
     if request.method == "POST":
         review = {
             "service_name": request.form.get("service_name"),
@@ -119,11 +86,20 @@ def add_review():
         }
         mongo.db.reviews.insert_one(review)
         return redirect(url_for("home"))
-    return render_template("add_reviews.html", service_list=service_list)
+    return render_template("add_reviews.html")
 
 
-# View reviews
-@app.route("/view_reviews")
-def view_reviews():
-    reviews = mongo.db.reviews.find()
-    return render_template('view_reviews.html', reviews=reviews)
+# Edit a review
+@app.route("/edit_review/<review_id>", methods=["GET", "POST"])
+def edit_review(review_id):
+
+    review = mongo.db.reviews.find_one({"_id": ObjectId(review_id)})
+
+    if request.method == "POST":
+        review = {
+            "service_name": request.form.get("service_name"),
+            "review": request.form.get("review"),
+            "created_by": session["user"]
+        }
+        mongo.db.reviews.update({"_id": ObjectId(review_id)}, review)
+    return render_template("edit_review.html", review=review)
