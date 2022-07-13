@@ -19,7 +19,7 @@
                 <span class="card-title">{{ review.description }}</span>
             </div>
             <div class="card-action">
-                <a href="#" class="btn grey">EDIT</a>
+                <a href="{{ url_for('edit_review', review_id=review.id) }}" class="btn grey">EDIT</a>
                 <a href="#" class="btn black">DELETE</a>
             </div>
         </div>
