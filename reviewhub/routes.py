@@ -70,10 +70,14 @@ def add_review():
 def edit_review(review_id):
     review = Review.query.get_or_404(review_id)
     companies = list(Company.query.all())
-    if request.method == "POST":
-        review.description = request.form.get('description')
-        review.company_id = request.form.get('company_id')
-        db.session.commit()
+    if session["user"] == review.created_by:
+        if request.method == "POST":
+            review.description = request.form.get('description')
+            review.company_id = request.form.get('company_id')
+            db.session.commit()
+            return redirect(url_for('home'))
+    else:
+        flash("You can only edit your own reviews")
         return redirect(url_for('home'))
     return render_template("edit_review.html", companies=companies, review=review)
 
@@ -82,8 +86,11 @@ def edit_review(review_id):
 @app.route("/delete_review/<int:review_id>")
 def delete_review(review_id):
     review = Review.query.get_or_404(review_id)
-    db.session.delete(review)
-    db.session.commit()
+    if session["user"] == review.created_by:
+        db.session.delete(review)
+        db.session.commit()
+    else:
+        flash("You can only delete your own reviews")
     return redirect(url_for('home'))
 
 
@@ -149,5 +156,3 @@ def logout():
     session.pop("user")
     flash("You have been logged out")
     return redirect(url_for('login'))
-
-
