@@ -19,13 +19,18 @@
         <div class="nav-wrapper grey ">
             <a href="{{ url_for('home') }}" class="brand-logo">Review Hub</a>
             <ul id="nav-mobile" class="right hide-on-med-and-down">
-                <li><a href="{{ url_for('home') }}">Home</a></li>
-                <li><a href="{{ url_for('companies') }}">Companies</a></li>
-                <li><a href="{{ url_for('add_review') }}">Add A Review</a></li>
-                <li><a href="{{ url_for('register_user') }}">Register</a></li>
-                <li><a href="{{ url_for('login') }}">Login</a></li>
-                <li><a href="{{ url_for('logout') }}">Logout</a></li>
-                <li><a href="{{ url_for('my_account', username=session['user']) }}">My Account</a></li>
+                {% if session.user %}
+                    {% if session.user == "admin@gmail.com" %}
+                        <li><a href="{{ url_for('companies') }}">Companies</a></li>
+                    {% endif %}
+                    <li><a href="{{ url_for('my_account', username=session['user']) }}">My Account</a></li>
+                    <li><a href="{{ url_for('add_review') }}">Add A Review</a></li>
+                    <li><a href="{{ url_for('logout') }}">Logout</a></li>
+                {% else %}
+                    <li><a href="{{ url_for('home') }}">Home</a></li>
+                    <li><a href="{{ url_for('register_user') }}">Register</a></li>
+                    <li><a href="{{ url_for('login') }}">Login</a></li>
+                {% endif %}
             </ul>
         </div>
     </nav>
@@ -34,15 +39,15 @@
 
         <!-- Flash messages -->
         {% with messages = get_flashed_messages() %}
-            {% if messages %}
-                {% for message in messages %}
-                    <div class="row center-align">
-                        <div class="col s12">
-                            <h2>{{ message }}</h2>
-                        </div>
-                    </div>
-                {% endfor %}
-            {% endif %}
+        {% if messages %}
+        {% for message in messages %}
+        <div class="row center-align">
+            <div class="col s12">
+                <h2>{{ message }}</h2>
+            </div>
+        </div>
+        {% endfor %}
+        {% endif %}
         {% endwith %}
 
         {% block content %}
