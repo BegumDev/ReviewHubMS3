@@ -34,3 +34,4 @@ class User(db.Model):
     def __repr__(self):
         # to represent itself as a string
         return self.username
+        return self.password

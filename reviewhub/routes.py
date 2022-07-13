@@ -83,3 +83,15 @@ def delete_review(review_id):
     return redirect(url_for('home'))
 
 
+# Register a user
+@app.route("/register_user", methods=["GET", "POST"])
+def register_user():
+    if request.method == "POST":
+        user = User(
+            username=request.form.get('username'),
+            password=request.form.get('password'),
+            )
+        db.session.add(user)
+        db.session.commit()
+        return redirect(url_for('home'))
+    return render_template("register_user.html")
