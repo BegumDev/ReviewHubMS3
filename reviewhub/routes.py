@@ -33,24 +33,19 @@ def add_company():
 @app.route("/edit_company/<int:company_id>", methods=["GET", "POST"])
 def edit_company(company_id):
     company = Company.query.get_or_404(company_id)
-    if session.user == "admin@gmail.com":
-        if request.method == "POST":
-            company.company_name = request.form.get('company_name')
-            db.session.commit()
-            return redirect(url_for('companies'))
-
-        flash("Only admin can change these options")
-        return redirect("home")
+    if request.method == "POST":
+        company.company_name = request.form.get('company_name')
+        db.session.commit()
+        return redirect(url_for('companies'))
     return render_template('edit_company.html', company=company)
 
 
 # 3. Delete a company
 @app.route("/delete_company/<int:company_id>")
 def delete_company(company_id):
-    if session.user == "admin@gmail.com":
-        company = Company.query.get_or_404(company_id)
-        db.session.delete(company)
-        db.session.commit()
+    company = Company.query.get_or_404(company_id)
+    db.session.delete(company)
+    db.session.commit()
     return redirect(url_for('companies'))
 
 
