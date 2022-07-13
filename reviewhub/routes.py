@@ -1,4 +1,5 @@
-from flask import render_template, url_for, redirect, request, session
+from flask import render_template, url_for, redirect, request, session, flash
+from werkzeug.security import generate_password_hash, check_password_hash
 from reviewhub import app, db
 from reviewhub.models import User, Review, Company
 
@@ -87,11 +88,33 @@ def delete_review(review_id):
 @app.route("/register_user", methods=["GET", "POST"])
 def register_user():
     if request.method == "POST":
+        # first check if they already registered
+        existing_user = User.query.filter(
+            User.username == request.form.get("username")).all()
+        if existing_user:
+            print("user already exists")
+            flash("Account already exists, please log in")
+            return redirect(url_for("register_user"))
+        # if not, add them
         user = User(
-            username=request.form.get('username'),
-            password=request.form.get('password'),
-            )
+            username=request.form.get('username').lower(),
+            password=generate_password_hash(request.form.get('password')),
+        )
         db.session.add(user)
         db.session.commit()
-        return redirect(url_for('home'))
+        # Put user into session cookie
+        session["user"] = request.form.get('username').lower()
+        return redirect(url_for('my_account'))
     return render_template("register_user.html")
+
+
+# My account
+@app.route("/my_account")
+def my_account():
+    return render_template("my_account.html")
+
+
+# # Log in
+# @app.route("/login", methods=["GET", "POST"])
+# def login():
+#     return render_template('reviews.html')
