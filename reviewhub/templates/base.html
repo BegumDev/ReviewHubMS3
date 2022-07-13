@@ -21,7 +21,7 @@
             <ul id="nav-mobile" class="right hide-on-med-and-down">
                 {% if session.user %}
                     {% if session.user == "admin@gmail.com" %}
-                        <li><a href="{{ url_for('companies') }}">Companies</a></li>
+                        <li><a href="{{ url_for('view_companies') }}">Companies</a></li>
                     {% endif %}
                     <li><a href="{{ url_for('my_account', username=session['user']) }}">My Account</a></li>
                     <li><a href="{{ url_for('add_review') }}">Add A Review</a></li>

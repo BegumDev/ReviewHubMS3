@@ -12,10 +12,10 @@ def home():
 
 
 # Companies page - View companies
-@app.route("/companies")
-def companies():
+@app.route("/view_companies")
+def view_companies():
     companies = list(Company.query.all())
-    return render_template("companies.html", companies=companies)
+    return render_template("view_companies.html", companies=companies)
 
 
 # 1. Add a company
@@ -25,7 +25,7 @@ def add_company():
         company = Company(service_name=request.form.get('service_name'))
         db.session.add(company)
         db.session.commit()
-        return redirect(url_for('companies'))
+        return redirect(url_for('view_companies'))
     return render_template("add_company.html")
 
 
@@ -36,7 +36,7 @@ def edit_company(company_id):
     if request.method == "POST":
         company.service_name = request.form.get('service_name')
         db.session.commit()
-        return redirect(url_for('companies'))
+        return redirect(url_for('view_companies'))
     return render_template('edit_company.html', company=company)
 
 
@@ -46,7 +46,7 @@ def delete_company(company_id):
     company = Company.query.get_or_404(company_id)
     db.session.delete(company)
     db.session.commit()
-    return redirect(url_for('companies'))
+    return redirect(url_for('view_companies'))
 
 
 # 1. Add a review
@@ -80,7 +80,8 @@ def edit_review(review_id):
     else:
         flash("You can only edit your own reviews")
         return redirect(url_for('home'))
-    return render_template("edit_review.html", companies=companies, review=review)
+    return render_template(
+        "edit_review.html", companies=companies, review=review)
 
 
 # 3. Delete a review
@@ -141,14 +142,14 @@ def login():
                 existing_user[0].password, request.form.get("password")
             ):
                 print("password matches")
-                session["user"] = request.form.get("username")
+                session["user"] = request.form.get("username").lower()
                 return redirect(url_for('my_account', username=session["user"]))
             else:
                 print("password not found")
                 return redirect(url_for('login'))
         else:
-            flash("User not found,please login")
-            return redirect(url_for('login'))
+            flash("User not found, please login")
+            return redirect(url_for("login"))
     return render_template('login.html')
 
 
