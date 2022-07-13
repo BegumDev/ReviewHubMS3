@@ -21,11 +21,15 @@ def companies():
 # 1. Add a company
 @app.route("/add_company", methods=["GET", "POST"])
 def add_company():
-    if request.method == "POST":
-        company = Company(company_name=request.form.get('company_name'))
-        db.session.add(company)
-        db.session.commit()
-        return redirect(url_for('companies'))
+    if session.user == "admin@gmail.com":
+        if request.method == "POST":
+            company = Company(company_name=request.form.get('company_name'))
+            db.session.add(company)
+            db.session.commit()
+            return redirect(url_for('companies'))
+    else:
+        flash("Only admin can change these options")
+        return redirect("home")
     return render_template("add_company.html")
 
 
@@ -33,19 +37,24 @@ def add_company():
 @app.route("/edit_company/<int:company_id>", methods=["GET", "POST"])
 def edit_company(company_id):
     company = Company.query.get_or_404(company_id)
-    if request.method == "POST":
-        company.company_name = request.form.get('company_name')
-        db.session.commit()
-        return redirect(url_for('companies'))
+    if session.user == "admin@gmail.com":
+        if request.method == "POST":
+            company.company_name = request.form.get('company_name')
+            db.session.commit()
+            return redirect(url_for('companies'))
+
+        flash("Only admin can change these options")
+        return redirect("home")
     return render_template('edit_company.html', company=company)
 
 
 # 3. Delete a company
 @app.route("/delete_company/<int:company_id>")
 def delete_company(company_id):
-    company = Company.query.get_or_404(company_id)
-    db.session.delete(company)
-    db.session.commit()
+    if session.user == "admin@gmail.com":
+        company = Company.query.get_or_404(company_id)
+        db.session.delete(company)
+        db.session.commit()
     return redirect(url_for('companies'))
 
 
@@ -121,7 +130,8 @@ def register_user():
 # My account
 @app.route("/my_account/<username>")
 def my_account(username):
-    return render_template("my_account.html", username=session["user"])
+    reviews = list(Review.query.all())
+    return render_template("my_account.html", username=session["user"], reviews=reviews)
 
 
 # Log in
@@ -155,4 +165,4 @@ def login():
 def logout():
     session.pop("user")
     flash("You have been logged out")
-    return redirect(url_for('login'))
+    return redirect(url_for('home'))
