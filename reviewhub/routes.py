@@ -21,15 +21,11 @@ def companies():
 # 1. Add a company
 @app.route("/add_company", methods=["GET", "POST"])
 def add_company():
-    if session.user == "admin@gmail.com":
-        if request.method == "POST":
-            company = Company(company_name=request.form.get('company_name'))
-            db.session.add(company)
-            db.session.commit()
-            return redirect(url_for('companies'))
-    else:
-        flash("Only admin can change these options")
-        return redirect("home")
+    if request.method == "POST":
+        company = Company(company_name=request.form.get('company_name'))
+        db.session.add(company)
+        db.session.commit()
+        return redirect(url_for('companies'))
     return render_template("add_company.html")
 
 
