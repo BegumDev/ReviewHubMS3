@@ -61,7 +61,7 @@ def add_review():
     return render_template("add_review.html", companies=companies)
 
 
-# 1. Edit a review
+# 2. Edit a review
 @app.route("/edit_review/<int:review_id>", methods=["GET", "POST"])
 def edit_review(review_id):
     review = Review.query.get_or_404(review_id)
@@ -72,3 +72,14 @@ def edit_review(review_id):
         db.session.commit()
         return redirect(url_for('home'))
     return render_template("edit_review.html", companies=companies, review=review)
+
+
+# 3. Delete a review
+@app.route("/delete_review/<int:review_id>")
+def delete_review(review_id):
+    review = Review.query.get_or_404(review_id)
+    db.session.delete(review)
+    db.session.commit()
+    return redirect(url_for('home'))
+
+
