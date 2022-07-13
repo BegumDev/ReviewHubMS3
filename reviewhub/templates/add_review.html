@@ -11,10 +11,16 @@
             <select id="company_id" name="company_id" class="validate" required>
                 <option value="" disabled selected>Choose company</option>
                 {% for company in companies %}
-                <option value="{{ company.id }}">{{ company.company_name }}</option>
+                <option value="{{ company.id }}">{{ company.service_name }}</option>
                 {% endfor %}
             </select>
             <label>Company</label>
+        </div>
+        <!-- company name -->
+        <div class="input-field col s8">
+            <input placeholder="Add a company name here" id="company_name" name="company_name" type="text" class="validate"
+                    required>
+            <label for="company_name">Review</label>
         </div>
         <!-- review description -->
         <div class="input-field col s8">

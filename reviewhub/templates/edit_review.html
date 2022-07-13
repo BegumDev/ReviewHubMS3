@@ -8,10 +8,10 @@
     <form class="col s12" action="{{ url_for('edit_review', review_id=review.id) }}" method="POST">
         <!-- Dropdown selection -->
         <div class="input-field col s8">
-            <select id="company_id" name="company_id" class="validate" value="{{ review.company_name }}" required>
+            <select id="company_id" name="company_id" class="validate" value="{{ review.service_name }}" required>
                 <option value="" disabled selected>Choose company</option>
                 {% for company in companies %}
-                    <option value="{{ company.id }}">{{ company.company_name }}</option>
+                    <option value="{{ company.id }}">{{ company.service_name }}</option>
                 {% endfor %}
             </select>
             <label>Company</label>

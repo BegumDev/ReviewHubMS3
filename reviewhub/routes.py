@@ -22,7 +22,7 @@ def companies():
 @app.route("/add_company", methods=["GET", "POST"])
 def add_company():
     if request.method == "POST":
-        company = Company(company_name=request.form.get('company_name'))
+        company = Company(service_name=request.form.get('service_name'))
         db.session.add(company)
         db.session.commit()
         return redirect(url_for('companies'))
@@ -34,7 +34,7 @@ def add_company():
 def edit_company(company_id):
     company = Company.query.get_or_404(company_id)
     if request.method == "POST":
-        company.company_name = request.form.get('company_name')
+        company.service_name = request.form.get('service_name')
         db.session.commit()
         return redirect(url_for('companies'))
     return render_template('edit_company.html', company=company)
@@ -55,6 +55,7 @@ def add_review():
     companies = list(Company.query.all())
     if request.method == "POST":
         review = Review(
+            company_name=request.form.get('company_name'),
             description=request.form.get('description'),
             created_by=request.form.get('created_by'),
             company_id=request.form.get('company_id')
