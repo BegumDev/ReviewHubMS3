@@ -4,12 +4,14 @@ from reviewhub import app, db
 from reviewhub.models import User, Review, Company
 
 
+# Homepage - View reviews
 @app.route("/")
 def home():
     reviews = list(Review.query.all())
     return render_template("reviews.html", reviews=reviews)
 
 
+# Companies page - View companies
 @app.route("/companies")
 def companies():
     companies = list(Company.query.all())
@@ -54,6 +56,7 @@ def add_review():
     if request.method == "POST":
         review = Review(
             description=request.form.get('description'),
+            created_by=request.form.get('created_by'),
             company_id=request.form.get('company_id')
         )
         db.session.add(review)
@@ -104,14 +107,14 @@ def register_user():
         db.session.commit()
         # Put user into session cookie
         session["user"] = request.form.get('username').lower()
-        return redirect(url_for('my_account'))
+        return redirect(url_for('my_account', username=session['user']))
     return render_template("register_user.html")
 
 
 # My account
-@app.route("/my_account")
-def my_account():
-    return render_template("my_account.html")
+@app.route("/my_account/<username>")
+def my_account(username):
+    return render_template("my_account.html", username=session["user"])
 
 
 # Log in
@@ -144,4 +147,7 @@ def login():
 @app.route("/logout")
 def logout():
     session.pop("user")
+    flash("You have been logged out")
     return redirect(url_for('login'))
+
+

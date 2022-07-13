@@ -22,6 +22,14 @@
                     required>
             <label for="description">Review</label>
         </div>
+        <!-- Created by -->
+        <div class="input-field col s8">
+            <select id="created_by" name="created_by" class="validate" required>
+                <option value="{{ session['user'] }}" selected>{{ session['user'] }}</option>
+            </select>
+            <label>Created By</label>
+        </div>
+        <!-- submit form -->
         <div class="row">
             <div class="input-field col s8">
                 <button type="submit">Add review</button>
