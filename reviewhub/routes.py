@@ -114,7 +114,27 @@ def my_account():
     return render_template("my_account.html")
 
 
-# # Log in
-# @app.route("/login", methods=["GET", "POST"])
-# def login():
-#     return render_template('reviews.html')
+# Log in
+@app.route("/login", methods=["GET", "POST"])
+def login():
+    # Check user exists
+    if request.method == "POST":
+        existing_user = User.query.filter(
+            User.username == request.form.get("username")
+        )
+        if existing_user:
+            print("user found")
+            # Check password
+            if check_password_hash(
+                existing_user[0].password, request.form.get("password")
+            ):
+                print("password matches")
+                session["user"] = request.form.get("username")
+                return redirect(url_for('my_account', username=session["user"]))
+            else:
+                print("password not found")
+                return redirect(url_for('login'))
+        else:
+            flash("User not found,please login")
+            return redirect(url_for('login'))
+    return render_template('login.html')
