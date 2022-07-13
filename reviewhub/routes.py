@@ -138,3 +138,10 @@ def login():
             flash("User not found,please login")
             return redirect(url_for('login'))
     return render_template('login.html')
+
+
+# Logout
+@app.route("/logout")
+def logout():
+    session.pop("user")
+    return redirect(url_for('login'))
