@@ -1,20 +1,20 @@
 {% extends "base.html" %}
 {% block content %}
 
-<h1 class="center-align">Register an account</h1>
+<h3 class="center-align">Register an account</h3>
 
 <!-- Form to register a user -->
-<div class="row">
+<div class="row forms">
     <form class="col s12" method="POST" action="{{ url_for('register_user') }}">
         <div class="row">
-            <div class="input-field col s6">
+            <div class="input-field col s12">
                 <input placeholder="Enter your email" name="username" id="username" type="text" class="validate">
                 <label for="username">Email</label>
             </div>
         </div>
         <div class="row">
-            <div class="input-field col s6">
-                <input placeholder="Enter your email" name="password" id="password" type="password" class="validate">
+            <div class="input-field col s12">
+                <input placeholder="Enter your password" name="password" id="password" type="password" class="validate">
                 <label for="password">Password</label>
             </div>
         </div>

@@ -3,7 +3,7 @@ section {
     height: auto;
 }
 
-________________________________________________________________________________
+/* ________________________________________________________________________________ */
 /* Reviews page */
 
 .testimonials {
@@ -52,4 +52,15 @@ h1 {
     padding: 15px;
     text-align: center;
     font-size: 40px;
+}
+
+/* ________________________________________________________________________________ */
+
+.forms{
+    height: auto;
+    width: 40%;
+    border: 4px solid grey;
+    border-radius: 30px;
+    padding: 30px;
+    margin-bottom: 100px;
 }
