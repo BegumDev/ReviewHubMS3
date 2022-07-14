@@ -1,18 +1,18 @@
 {% extends "base.html" %}
 {% block content %}
 
-<h1>Edit a Company</h1>
+<h1 class="center-align">Edit a Company</h1>
 
-<div class="row">
-    <form class="col s8" action="{{ url_for('edit_company', company_id=company.id) }}" method="POST">
+<div class="row forms">
+    <form class="col s12" action="{{ url_for('edit_company', company_id=company.id) }}" method="POST">
         <div class="row">
-            <div class="input-field col s8">
+            <div class="input-field col s12">
                 <input placeholder="Edit a company here" id="service_name" name="service_name" value="{{ company.service_name }}" type="text" class="validate" required>
                 <label for="service_name">Company Name</label>
             </div>
         </div>
         <div class="row">
-            <div class="input-field col s8">
+            <div class="input-field col s12">
                 <button type="submit">Edit Company</button>
             </div>
         </div>
