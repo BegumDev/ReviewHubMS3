@@ -77,10 +77,10 @@ def edit_review(review_id):
             review.description = request.form.get('description')
             review.company_id = request.form.get('company_id')
             db.session.commit()
-            return redirect(url_for('home'))
+            return redirect(url_for('my_account', username=session["user"]))
     else:
         flash("You can only edit your own reviews")
-        return redirect(url_for('home'))
+        return redirect(url_for('my_account', username=session["user"]))
     return render_template(
         "edit_review.html", companies=companies, review=review)
 

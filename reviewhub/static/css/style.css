@@ -43,3 +43,13 @@ h1 {
     height: 200px;
     margin: 10px;
 }
+
+.flash-messages{
+    border: 2px solid grey;
+    border-radius: 30px;
+    width: 50%;
+    height: 100px;
+    padding: 15px;
+    text-align: center;
+    font-size: 40px;
+}

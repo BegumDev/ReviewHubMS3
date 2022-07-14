@@ -45,7 +45,7 @@
             <div class="modal-footer center-align">
                 <a href="{{ url_for('delete_review', review_id=review.id) }}"
                     class="modal-close waves-effect waves-green btn red">YES</a>
-                <a href="{{ url_for('home') }}"
+                <a href="{{ url_for('my_account', username=session['user']) }}"
                     class="modal-close waves-effect waves-green btn">NO</a>
             </div>
         </div>
