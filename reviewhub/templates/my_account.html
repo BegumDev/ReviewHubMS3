@@ -17,7 +17,7 @@
 
 <div class="row">
     {% for review in reviews %}
-        {% if session.user == review.created_by or "admin@gmail.com" %}
+        {% if session.user == review.created_by or session.user == "admin@gmail.com" %}
         <!-- Displays each review as a card -->
         <div class="col s2 m3">
             <div class="card blue-grey darken-1">
