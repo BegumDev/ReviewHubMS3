@@ -26,12 +26,12 @@
                 <!-- Edit a review -->
                 <a href="{{ url_for('edit_review', review_id=review.id) }}" class="btn grey">EDIT</a>
                 <!-- Delete a review modal trigger -->
-                <a class="waves-effect waves-light btn modal-trigger" href="#modal1">Delete</a>
+                <a class="waves-effect waves-light btn modal-trigger" href="#modal1{{ loop.index }}">Delete</a>
             </div>
         </div>
     </div>
     <!-- Modal popup to check if user wants to delete their review -->
-    <div id="modal1" class="modal">
+    <div id="modal1{{ loop.index }}" class="modal">
         <div class="modal-content center-align">
             <h4>Are you sure you want to delete?</h4>
             <h5>WARNING: This review cannot be recovered!</h5>
