@@ -159,4 +159,4 @@ def login():
 def logout():
     session.pop("user")
     flash("You have been logged out")
-    return redirect(url_for('home'))
+    return redirect(url_for('login'))
