@@ -1,7 +1,29 @@
 {% extends "base.html" %}
 {% block content %}
 
-<h1 class="center-align">Reviews</h1>
+<!-- hero section -->
+<div class="row review-hero">
+    <div class="col s12 review-hero-text">
+        <h1> The no.1 trusted review site</h1>
+    </div>
+</div>
+
+<!-- Brands design -->
+<div class="row brands">
+    <div class="col s12">
+        <h2>Brands</h2>
+        <img src="data:image/png;base64,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"
+            alt="Virgin Media Brand Logo">
+        <img src="https://seekvectorlogo.com/wp-content/uploads/2018/01/sky-plc-vector-logo-small.png" alt="Sky Brand Logo">
+        <img src="https://www.scottishhousingnews.com/uploads/John%20Lewis.png" alt="John Lewis Brand Logo">
+        <img src="https://pbs.twimg.com/profile_images/1543830184213860352/_X0qPYlF_400x400.jpg" alt="Tesco Brand Logo">
+        <img src="https://d3hjzzsa8cr26l.cloudfront.net/c53a9aa6-2771-11e8-82b2-4797c13ab508.jpg" alt="British Gas Logo">
+        <img src="" alt="">
+        <img src="" alt="">
+        <img src="" alt="">
+        <img src="" alt="">
+    </div>
+</div>
 
 <!-- See all reviews -->
 <div class="row">
@@ -14,13 +36,16 @@
             <div class="card-content white-text">
                 <span class="card-title">{{ review.description }}</span>
             </div>
-            <!-- <div class="card-action">
-                <a href="{{ url_for('edit_review', review_id=review.id) }}" class="btn grey">EDIT</a>
-                <a href="{{ url_for('delete_review', review_id=review.id) }}" class="btn black">DELETE</a>
-            </div> -->
         </div>
     </div>
     {% endfor %}
+</div>
+
+<!-- Testimonials -->
+<div class="row testimonials">
+    <div class="col s12">
+        <h2>Testimonials</h2>
+    </div>
 </div>
 
 
