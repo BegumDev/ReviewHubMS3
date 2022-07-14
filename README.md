@@ -76,23 +76,27 @@
         - Python
 * ### Development Tools.
     * Github.
-        - 
+        - Used to store the projects after being pushed using Git.
     * Gitpod.
-        - 
+        - Hosts the coding workspace.
     * Heroku.
-        - 
+        - Cloud platform for deploying the app.
 
 ### Frameworks, Libraries & Programs Used
 * MaterialzeCSS.
     - Used for responsiveness.
 * Flask.
-    - Responsible to render templates.
+    - A web-framework app responsible to render templates.
 * Balsamiq
     - Used to create wireframes of the website.
-* PostgreSQL.
-    - Storage for relational data to implement CRUD functionality.
 * Jinja.
     - Template language for python for easy creation of backend code through to the frintend.
+* Werkzeug Security.
+    - Used for password hashing and password authorisation.
+
+### Database structure.
+* PostgreSQL.
+    - Storage for relational data to implement CRUD functionality.
 
 
 ## Testing
