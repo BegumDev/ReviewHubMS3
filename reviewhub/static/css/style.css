@@ -1,6 +1,6 @@
 
 section {
-    height: 2000px;
+    height: auto;
 }
 
 ________________________________________________________________________________
@@ -22,6 +22,7 @@ ________________________________________________________________________________
     background-repeat: no-repeat;
     background-position: center center;
     background-size: cover;
+    opacity: 80%;
 }
 
 .review-hero-text,
@@ -31,14 +32,10 @@ h1 {
 
 .brands {
     width: 70%;
-    height: 700px;
+    height: auto;
     color: black;
     padding-right: 20px;
     margin-top: 20px
-}
-
-.brands h2 {
-    text-align: right;
 }
 
 .brands img {
