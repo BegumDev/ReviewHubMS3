@@ -88,7 +88,7 @@ def edit_review(review_id):
 @app.route("/delete_review/<int:review_id>")
 def delete_review(review_id):
     review = Review.query.get_or_404(review_id)
-    if session["user"] == review.created_by:
+    if session["user"] == review.created_by or "admin@gmail.com":
         db.session.delete(review)
         db.session.commit()
     else:
