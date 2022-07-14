@@ -56,24 +56,43 @@
 ## Features
 ***
 * ### Current Features
-    1. 
-    2. 
-    3. 
+    1. Logging In
+    2. Admin can add or delete reviews (related db will also delete reviews with it.)
+    3. My account has own reviews in it where you can edit and delete.
+    4. Log out.
+    5. Populates all reviews on main page.
     
 * ### Future Features
-    1. 
-    2. 
-    3. 
+    1. Edit own details and delete own account.
+
     
         
 ## Technologies Used
 ***
-### Languages Used
-* 
-* 
+* ### Languages Used
+    * Frontend;
+        - HTML, CSS, jQuery.
+    * Backend;
+        - Python
+* ### Development Tools.
+    * Github.
+        - 
+    * Gitpod.
+        - 
+    * Heroku.
+        - 
 
 ### Frameworks, Libraries & Programs Used
-* 
+* MaterialzeCSS.
+    - Used for responsiveness.
+* Flask.
+    - Responsible to render templates.
+* Balsamiq
+    - Used to create wireframes of the website.
+* PostgreSQL.
+    - Storage for relational data to implement CRUD functionality.
+* Jinja.
+    - Template language for python for easy creation of backend code through to the frintend.
 
 
 ## Testing
@@ -105,9 +124,10 @@
 
 ## Deployment
 ***
-* ###
-* ###
-* ###
+1. Working with a local copy.
+    - PSQL
+2. Deploying to Heroku.
+    - Add PostgreSQL to the Heroku app. Create db...
 
 
 ## Credits
@@ -119,5 +139,6 @@
 
 
 * ### Media
+
 
 * ### Acknowledgements
