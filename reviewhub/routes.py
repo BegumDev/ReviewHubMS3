@@ -73,6 +73,7 @@ def edit_review(review_id):
     companies = list(Company.query.all())
     if session["user"] == review.created_by:
         if request.method == "POST":
+            review.company_name = request.form.get('company_name'),
             review.description = request.form.get('description')
             review.company_id = request.form.get('company_id')
             db.session.commit()

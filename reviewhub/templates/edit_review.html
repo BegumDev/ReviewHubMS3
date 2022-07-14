@@ -16,6 +16,12 @@
             </select>
             <label>Company</label>
         </div>
+        <!-- company name -->
+        <div class="input-field col s8">
+            <input placeholder="Add a company name here" id="company_name" name="company_name" value="{{ review.company_name }}" type="text" class="validate"
+                    required>
+            <label for="company_name">Company Name</label>
+        </div>
         <!-- review description -->
         <div class="input-field col s8">
             <input placeholder="Edit a review here" id="description" name="description" value="{{ review.description }}" type="text" class="validate"
