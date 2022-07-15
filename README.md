@@ -125,7 +125,9 @@
             3. 
         
 * ### Code validation.
-    * 
+    1. Admin unable to delete reviews.
+        - Fix:
+            - Add to the line of code where; those who created the review can delete it - by enbaling the admin to do so aswell.
     * 
     * 
 
