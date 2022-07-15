@@ -27,8 +27,8 @@
 ***
 - ### User stories
     - #### Visitor goals:
-        1. I want to create my own reviews on the website.
-        2. I want to be able to log in and delete any of my reviews.
+        1. I want to be able to log in and delete any of my reviews.
+        2. I want to create my own reviews on the website.
         3. I want to be able to receive feedback on my progress when creating or deleting content.
 
 - ### Design
@@ -102,11 +102,27 @@
 ## Testing
 ***
 * ### Testing user stories from user experience (UX).
-    * #### Aim 1
+    * #### Aim 1 - I want to be able to log in and delete any of my reviews.
+        - Once a logged in, a user can;
+            1. Click on my account.
+            2. All their own reviews are visible on their account page.
+            3. Buttons are accessible to delete straight from the same page.
+            4. Once clicked a modal will pop up.
+            5. Click yes will confirm deletion and clicking no will return them back.
 
-    * #### Aim 2
+    * #### Aim 2 -I want to create my own reviews on the website.
+        - Once a logged in, a user can;
+            1. Click on 'add a review' in their menu tab.
+            2. Users will be guided to a form to add a review.
+            3. Once filled out and submitted; the users review will pop up on the main website page aswell as their own.
     
-    * #### Aim 3
+    * #### Aim 3 - I want to be able to receive feedback on my progress when creating or deleting content.
+        - Logging out;
+            1. When the user logs out, a flash message will appear at the top of the page confirming they are logged out.
+        - Deleting a review;
+            1. Users click on the delete button.
+            2. This will throw up a modal to confirm if they want to proceed or not.
+            3. 
         
 * ### Code validation.
     * 
