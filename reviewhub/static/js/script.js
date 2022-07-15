@@ -1,3 +1,8 @@
+// Mobile side nav (Materialize)
+$(document).ready(function(){
+  $('.sidenav').sidenav();
+});
+
 // form input (Materialize)
 $(document).ready(function () {
   $('select').formSelect();

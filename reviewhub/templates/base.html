@@ -5,24 +5,24 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- Font Awesome Link -->
-    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
-        integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
-        crossorigin="anonymous" referrerpolicy="no-referrer" /> -->
     <!-- Materialize Link  -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <!-- Font Awesome Link -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
         integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!-- My own stylesheet -->
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" type="text/css">
     <title>Review Hub</title>
 </head>
 
 <body>
-
+    <!-- Navigation menu -->
     <nav>
+        <!-- Larger screen menu -->
         <div class="nav-wrapper blue-grey">
-            <a href="{{ url_for('home') }}" class="brand-logo">Review Hub</a>
+            <a href="{{ url_for('home') }}" class="brand-logo center">Review Hub</a>
+            <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="fas fa-bars"></i></a>
             <ul id="nav-mobile" class="right hide-on-med-and-down">
                 {% if session.user %}
                 {% if session.user == "admin@gmail.com" %}
@@ -38,6 +38,21 @@
                 {% endif %}
             </ul>
         </div>
+        <!-- Mobile menu -->
+        <ul class="sidenav" id="mobile-demo">
+            {% if session.user %}
+            {% if session.user == "admin@gmail.com" %}
+            <li><a href="{{ url_for('view_companies') }}">Companies</a></li>
+            {% endif %}
+            <li><a href="{{ url_for('my_account', username=session['user']) }}">My Account</a></li>
+            <li><a href="{{ url_for('add_review') }}">Add A Review</a></li>
+            <li><a href="{{ url_for('logout') }}">Logout</a></li>
+            {% else %}
+            <li><a href="{{ url_for('home') }}">Home</a></li>
+            <li><a href="{{ url_for('register_user') }}">Register</a></li>
+            <li><a href="{{ url_for('login') }}">Login</a></li>
+            {% endif %}
+        </ul>
     </nav>
 
     <section>
