@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% block content %}
+
+<h1 class="center-align">Get in touch</h1>
+
+<h2 class="email-msg center-align"></h2>
+
+<div class="row forms">
+    <form class="email-form" onsubmit="return sendMail(this)">
+        <div class="col-12">
+            <label for="name">Full Name:</label>
+            <br>
+            <input type="text" class="name" id="name" name="name" placeholder="Enter your full name..." required>
+            <br>
+            <label for="email">Email Address:</label>
+            <br>
+            <input type="email" class="email" id="email" name="email" placeholder="Enter your email address..." required>
+            <label for="message">Your Message:</label>
+            <br>
+            <textarea rows="8" cols="55" id="message" name="message" class="text-area" placeholder="Enter your message here..." required></textarea>
+            <br>
+            <input type="submit" id="submit-email">
+        </div>
+    </form>
+</div>
+
+{% endblock %}

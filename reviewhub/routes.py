@@ -162,6 +162,11 @@ def logout():
     return redirect(url_for('login'))
 
 
+# Send email
+@app.route('/contact_us')
+def contact_us():
+    return render_template("contact.html")
+
 # Error handling - page not found
 @app.errorhandler(404)
 def page_not_found(e):
