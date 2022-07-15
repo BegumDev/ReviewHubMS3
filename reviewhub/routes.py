@@ -162,7 +162,7 @@ def logout():
     return redirect(url_for('login'))
 
 
-# Error handling
+# Error handling - page not found
 @app.errorhandler(404)
 def page_not_found(e):
     return render_template('404.html', title='404 - Page Not Found'), 404
