@@ -94,7 +94,7 @@ def delete_review(review_id):
         db.session.commit()
     else:
         flash("You can only delete your own reviews")
-    return redirect(url_for('home'))
+    return redirect(url_for('my_account', username=session["user"]))
 
 
 # Register a user
