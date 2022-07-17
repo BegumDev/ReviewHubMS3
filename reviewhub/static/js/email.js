@@ -4,7 +4,7 @@ let clearForm = document.querySelector('.email-form')
 
 
 function emailSent() {
-    emailMsg.innerHTML = "Thanks! We will be in touch shortly."
+    emailMsg.innerHTML = "Thanks! Your email has been sent."
 }
 
 function emailNotSent() {
