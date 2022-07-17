@@ -66,6 +66,7 @@ def add_review():
     return render_template("add_review.html", companies=companies)
 
 
+# Edit a review
 @app.route("/edit_review/<int:review_id>", methods=["GET", "POST"])
 def edit_review(review_id):
     review = Review.query.get_or_404(review_id)
@@ -82,7 +83,6 @@ def edit_review(review_id):
         return redirect(url_for('my_account', username=session["user"]))
     return render_template(
         "edit_review.html", companies=companies, review=review)
-
 
 
 # 3. Delete a review
@@ -124,8 +124,16 @@ def register_user():
 # My account
 @app.route("/my_account/<username>")
 def my_account(username):
-    reviews = list(Review.query.all())
-    return render_template("my_account.html", username=session["user"], reviews=reviews)
+    is_admin = session['user'] == "admin@gmail.com" 
+    reviews = list(Review.query.filter(Review.created_by == session['user'] or is_admin))
+    return render_template("my_account.html", username=session["user"], reviews=reviews, is_admin_user=is_admin)
+
+# # My account
+# @app.route("/my_account/<username>")
+# def my_account(username):
+#     reviews = list(Review.query.all())
+#     is_admin = session['user'] == "admin@gmail.com" 
+#     return render_template("my_account.html", username=session["user"], reviews=reviews, is_admin_user=is_admin)
 
 
 # Log in
