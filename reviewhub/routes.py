@@ -66,7 +66,6 @@ def add_review():
     return render_template("add_review.html", companies=companies)
 
 
-# 2. Edit a review
 @app.route("/edit_review/<int:review_id>", methods=["GET", "POST"])
 def edit_review(review_id):
     review = Review.query.get_or_404(review_id)

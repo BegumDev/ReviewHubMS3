@@ -32,11 +32,15 @@
                     required>
             <label for="description">Review</label>
         </div>
-        <!-- confirm edit button -->
+        <!-- confirm edit or go back buttons -->
         <div class="row">
             <div class="input-field col s12">
                 <button type="submit">Edit review</button>
             </div>
+            <div class="input-field col s12">
+                <button type="submit"><a href="{{ url_for('my_account', username=session['user']) }}">Cancel</a></button>
+            </div>
+
         </div>
     </form>
 </div>
