@@ -85,6 +85,7 @@ def edit_review(review_id):
         "edit_review.html", companies=companies, review=review)
 
 
+
 # 3. Delete a review
 @app.route("/delete_review/<int:review_id>")
 def delete_review(review_id):

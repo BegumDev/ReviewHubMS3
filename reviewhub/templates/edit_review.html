@@ -8,10 +8,14 @@
     <form class="col s12" action="{{ url_for('edit_review', review_id=review.id) }}" method="POST">
         <!-- Dropdown selection -->
         <div class="input-field col s12">
-            <select id="company_id" name="company_id" class="validate" value="{{ review.service_name }}" required>
-                <option value="" disabled selected>Choose company</option>
+            <select id="company_id" name="company_id" class="validate" required>
+                <option value="" disabled >Choose company</option>
                 {% for company in companies %}
-                    <option value="{{ company.id }}">{{ company.service_name }}</option>
+                    {% if company == review.company %}
+                        <option value="{{ company.id }}" selected>{{ company.service_name }}</option>
+                    {% else %}
+                        <option value="{{ company.id }}">{{ company.service_name }}</option>
+                    {% endif %}
                 {% endfor %}
             </select>
             <label>Company</label>
@@ -28,6 +32,7 @@
                     required>
             <label for="description">Review</label>
         </div>
+        <!-- confirm edit button -->
         <div class="row">
             <div class="input-field col s12">
                 <button type="submit">Edit review</button>
@@ -37,3 +42,4 @@
 </div>
 
 {% endblock %}
+
