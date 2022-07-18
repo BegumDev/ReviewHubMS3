@@ -44,12 +44,12 @@
 - ### Wireframes
     <details><summary>Main Page Wireframe:</summary>
 
-    ![Main Page Wireframe](reviewhub/static/images/readme-images/wireframes/main-page-wireframe.JPG)
+    ![Main Page Wireframe](doc/wireframes/images/main-page-wireframe.JPG)
     </details>
 
     <details><summary>My Account Wireframe:</summary>
 
-    ![My Account Wireframe](reviewhub/static/images/readme-images/wireframes/my-account-wireframe.JPG)
+    ![My Account Wireframe](doc/wireframes/images/my-account-wireframe.JPG)
 
     </details>
 
