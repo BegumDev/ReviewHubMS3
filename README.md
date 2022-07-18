@@ -126,8 +126,16 @@
             1. When the user logs out, a flash message will appear at the top of the page confirming they are logged out.
         
 * ### Code validation.
-    * HTML Validation
-    * CSS Validation
+    <details><summary>HTML Validation result:</summary>
+
+    ![HTML Validation result](doc/images/html_validation.JPG)
+    </details>
+
+    <details><summary>CSS Validation:</summary>
+
+    ![HTML Validation result](doc/images/css_validation.JPG)
+    </details>
+    
     * JSHint Results
     * PEP 8 Results
 
