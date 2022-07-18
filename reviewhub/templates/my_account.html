@@ -1,23 +1,8 @@
 {% extends "base.html" %}
 {% block content %}
 
-<!-- Code for title of my account the user will see  -->
-{% if is_admin_user %}
-<h1 class="center-align">Admin Dashboard</h1>
-{% else %}
-<h1 class="center-align">My Account</h1>
-{% endif %}
 
-<!-- Welcome message -->
-<div class="row">
-    <div class="col s12">
-        {% if is_admin_user %}
-        <h2 class="center-align">Welcome: Admin</h2>
-        {% else %}
-        <h2 class="center-align">Welcome: {{ username }}</h2>
-        {% endif %}
-    </div>
-</div>
+<h2 class="center-align">Welcome: {{ username }}</h2>
 
 <!-- Shows each review card -->
 <div class="row">

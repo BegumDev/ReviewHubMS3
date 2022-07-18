@@ -8,15 +8,15 @@ from reviewhub.models import User, Review, Company
 @app.route("/")
 def home():
     reviews = list(Review.query.all())
-    is_admin = session['user'] == "admin@gmail.com"
-    return render_template("reviews.html", reviews=reviews, is_admin_user=is_admin)
+    return render_template("reviews.html", reviews=reviews)
 
 
 # Companies page - View companies
 @app.route("/view_companies")
 def view_companies():
     companies = list(Company.query.all())
-    return render_template("view_companies.html", companies=companies)
+    reviews = list(Review.query.all())
+    return render_template("view_companies.html", companies=companies, reviews=reviews)
 
 
 # 1. Add a company
@@ -94,7 +94,7 @@ def delete_review(review_id):
         db.session.delete(review)
         db.session.commit()
         if session["user"] == "admin@gmail.com":
-            return redirect(url_for('home'))
+            return redirect(url_for('view_companies'))
         else:
             return redirect(url_for('my_account', username=session["user"]))
     else:
@@ -158,7 +158,10 @@ def login():
             ):
                 print("password matches")
                 session["user"] = request.form.get("username").lower()
-                return redirect(url_for('my_account', username=session["user"]))
+                if session["user"] == "admin@gmail.com":
+                    return redirect(url_for('view_companies'))
+                else:
+                    return redirect(url_for('my_account', username=session["user"]))
             else:
                 print("password not found")
                 return redirect(url_for('login'))
