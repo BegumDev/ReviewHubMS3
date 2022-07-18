@@ -1,14 +1,14 @@
 let contactForm = document.querySelector('.email-form');
-let emailMsg = document.querySelector('.email-msg')
-let clearForm = document.querySelector('.email-form')
+let emailMsg = document.querySelector('.email-msg');
+let clearForm = document.querySelector('.email-form');
 
 
 function emailSent() {
-    emailMsg.innerHTML = "Thanks! Your email has been sent."
+    emailMsg.innerHTML = "Thanks! Your email has been sent.";
 }
 
 function emailNotSent() {
-    emailMsg.innerHTML = "Sorry! That didn't quite work. Please try again."
+    emailMsg.innerHTML = "Sorry! That didn't quite work. Please try again.";
 }
 
 
@@ -26,7 +26,7 @@ function sendMail(contactForm) {
             clearForm.reset();
         },
         function (error){
-            console.log("email has not sent")
+            console.log("email has not sent");
             emailNotSent();
         }
     );
