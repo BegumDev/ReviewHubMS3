@@ -17,7 +17,7 @@
 
 <h1 align="center">Review Hub</h1>
 
-[View the live project here] 
+[View the live project here](https://reviewhubbd.herokuapp.com/)
 
 ![Image of the website on desktop, laptop, tablet and mobile]
 
@@ -56,16 +56,38 @@
 ## Features
 ***
 * ### Current Features
-    1. Logging In
-    2. Admin can add or delete reviews (related db will also delete reviews with it.)
-    3. My account has own reviews in it where you can edit and delete.
-    4. Log out.
-    5. Populates all reviews on main page.
+    * Main Page:
+        1. View all reviews created by all users.
+        2. Register a new account.
+        3. Login.
+        4. Contact the organisation.
+        5. Footer
+    * Register Page:
+        1. Submit personal information and it will be stored on a database.
+        2. Once details are logged it will route you to your own account page.
+    * My Account Page:
+        1. Add a review and once added - will display on the main page and in your own account.
+        2. Each review allows you to edit the review with preset values to show the user what they previosuly input.
+        3. Each review allows you to delete the review but triggers a defensive modal first to ensure the user is happy to delete it. If clicked yes, it will delete the review and route them back to their account. If no is clicked, it will cancel the delete and route back to their account.
+        4. Logout;
+            - Users once finished can log out successfully and they willbe routed back to the login page with a flash message confirming the log out.
+    *   Contact us page;
+        1. Users are able to click on the contact page throughout so they can send an email and get in touch. This feature is on all pages for ease of access.
+        2. Each input field has direction so the user can type the right details with all fields being madatory.
+        3. If emails have successfully sent, a message will pop confirming this. If unsuccessful the message will ask them to try again.
+    * Admin Access;
+        1. A designated account has been reserved for admin. The admin can log in.Once they do, they will be routed to a dashboard where they can;
+            * create company categories
+            * edit company category names
+            * delete company categories and its associated reviews.
+            * delete any review (incase of any malicious revies.) again; with a defensive modal.
     
 * ### Future Features
-    1. Edit own details and delete own account.
-
-    
+    * Due to time constraints, the following features could not be added but will be enabled in the future;
+        1. Edit own details and delete own account.
+        2. Search functionality.
+        3. Image incorporation for each review.
+        
         
 ## Technologies Used
 ***
