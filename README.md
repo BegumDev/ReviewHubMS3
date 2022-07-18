@@ -130,7 +130,7 @@
             2. All their own reviews are visible on their account page.
             3. Buttons are accessible to delete straight from the same page.
             4. Once clicked a modal will pop up.
-            5. Click yes will confirm deletion and clicking no will return them back.
+            5. Clicking yes will confirm deletion and clicking no will cancel the deletion and route back to their account.
 
     * #### Aim 2 -I want to create my own reviews on the website.
         - Once a logged in, a user can;
@@ -141,10 +141,6 @@
     * #### Aim 3 - I want to be able to receive feedback on my progress when creating or deleting content.
         - Logging out;
             1. When the user logs out, a flash message will appear at the top of the page confirming they are logged out.
-        - Deleting a review;
-            1. Users click on the delete button.
-            2. This will throw up a modal to confirm if they want to proceed or not.
-            3. 
         
 * ### Code validation.
     1. Admin unable to delete reviews.
@@ -168,11 +164,43 @@
 
 ## Deployment
 ***
-1. Working with a local copy.
-    - PSQL
-2. Deploying to Heroku.
-    - Add PostgreSQL to the Heroku app. Create db...
-
+* Create a Heroku app.
+    1. Create an account and log in to Heroku.
+    2. Click on 'new' then 'create app' from the drop down.
+    3. Create a unique app name and choose a region closest to you.
+    4. Click 'create.'
+* Push the local copy of the repo to Github
+    1. Create a 'requirement.txt' file;
+        * In the command line; type "pip3 freeze --local > requirements.txt". This will create a file with all the required installations needed.
+    2. Create a Procfile;
+        * Enter "echo web: python app.py > Procfile" which will create a file that Heroku needs. Remove any blank lines from this file as this can cause disruptions later.
+    3. Ensure both files are at the root level.
+* Add Heroku Config Vars;
+    1. Click on settings from the Heroku main page.
+    2. Click 'reveal config vars.'
+    3. enter the following into each input field;
+        * IP (0.0.0.0)
+        * PORT (5000)
+        * SECRET_KEY (YOUR_OWN_SECRET_KEY)
+        * DATABASE_URL (Your own database URL)
+        * DEBUG (True)
+* Connect PostgreSQL in resources and db.create_all()
+    1. Go to Heroku and click on 'resources.
+    2. Type 'PostgreSQL' and click on 'Heroku POstgres.'
+    3. Click on 'Hobby Dev - Free.'
+    4. At the top right-hand corner, click on 'more' and from the drop down - click 'run console.'
+    5. Once the command line loads, enter the following to load all the tables from the model.py file;
+        * 'python3'
+        * 'from reviewhub import db'
+        * db.create_all()
+        * click 'ctrl + c' to close the command line.
+* Connect to Github;
+    1. Click on 'deploy.'
+    2. Click on 'Github'as a deployment method.
+    3. Type in your repo name and click search.
+    4. Once it finds it - click connect.
+* Deploy;
+    1. Ensure automatic deploys is checked, else click 'manual deploy' (to main branch.)
 
 ## Credits
 ***
