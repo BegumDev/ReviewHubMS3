@@ -16,27 +16,27 @@ $(document).ready(function () {
 // ===========================================================================
 
 
-// // Hide reviews on main page on page load
-// $(document).ready(function () {
-//   $('.show-review').hide();
-//   $('.close-reviews').hide();
-// });
+// Hide reviews on main page on page load
+$(document).ready(function () {
+  $('.show-review').hide();
+  $('.close-reviews').hide();
+});
 
 
-// // Show reviews on button click.
-// $(document).ready(function () {
-//   $(".open-reviews").click(function () {
-//     $(".show-review").fadeIn(1000);
-//     $('.open-reviews').hide();
-//     $('.close-reviews').show();
-//   });
-// });
+// Show reviews on button click.
+$(document).ready(function () {
+  $(".open-reviews").click(function () {
+    $(".show-review").fadeIn(1000);
+    $('.open-reviews').hide();
+    $('.close-reviews').show();
+  });
+});
 
-// // Hide reviews on button click
-// $(document).ready(function () {
-//   $(".close-reviews").click(function () {
-//     $(".show-review").fadeOut(1000);
-//     $(".open-reviews").show();
-//     $('.close-reviews').hide();
-//   });
-// });
+// Hide reviews on button click
+$(document).ready(function () {
+  $(".close-reviews").click(function () {
+    $(".show-review").fadeOut(1000);
+    $(".open-reviews").show();
+    $('.close-reviews').hide();
+  });
+});

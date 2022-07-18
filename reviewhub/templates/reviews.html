@@ -8,22 +8,19 @@
     </div>
 </div>
 
+<!-- <div class="row">
+    <div class="col s8">
+        <form action="#">
+            <label for="search"><i class="fa-solid fa-magnifying-glass"></i> Search</label>
+            <input type="search">
+            <button class="submit">Search</button>
+        </form>
+    </div>
+</div> -->
+
 <!-- See all reviews -->
 <div>
-    <!-- Buttton reveals the reviews below -->
-    <!-- <div class="row">
-        <div class="col s12 center-align">
-            <button class="open-reviews reviews-btn btn-large">See Reviews <i
-                    class="fa-solid fa-turn-down"></i></button>
-        </div> -->
-    <!-- Button to close the review -->
-    <!-- <div class="col s12 center-align">
-            <button class="close-reviews reviews-btn btn-large">Close Reviews <i
-                    class="fa-solid fa-turn-up"></i></button>
-        </div>
-    </div> -->
-    <!-- Reviews to be shown -->
-    <div class="row show-review">
+    <div class="row">
         {% for review in reviews %}
         <div class="col s6 m3 l2">
             <div class="card blue-grey darken-1">
@@ -33,26 +30,6 @@
                 <div class="card-content white-text">
                     <span class="card-title">{{ review.description }}</span>
                 </div>
-                {% if is_admin_user %}
-                <div class="col s12 card-action">
-                    <!-- Delete a review modal trigger -->
-                    <a class="waves-effect waves-light btn modal-trigger" href="#modal1{{ loop.index }}">Delete</a>
-                </div>
-                {% endif %}
-            </div>
-        </div>
-        <!-- Modal popup to check if user wants to delete their review -->
-        <div id="modal1{{ loop.index }}" class="modal">
-            <div class="modal-content center-align">
-                <h4>Are you sure you want to delete?</h4>
-                <h5>WARNING: This review cannot be recovered!</h5>
-            </div>
-            <!-- Confirm deletion -->
-            <div class="modal-footer center-align">
-                <a href="{{ url_for('delete_review', review_id=review.id) }}"
-                    class="modal-close waves-effect waves-green btn red">YES</a>
-                <a href="{{ url_for('my_account', username=session['user']) }}"
-                    class="modal-close waves-effect waves-green btn">NO</a>
             </div>
         </div>
         {% endfor %}

@@ -7,6 +7,9 @@ from reviewhub.models import User, Review, Company
 # Homepage - View reviews
 @app.route("/")
 def home():
+    """
+    Routes the user back to the homepage and displays all reviews
+    """
     reviews = list(Review.query.all())
     return render_template("reviews.html", reviews=reviews)
 
@@ -14,6 +17,9 @@ def home():
 # Companies page - View companies
 @app.route("/view_companies")
 def view_companies():
+    """
+    Enables admin to view and manage companies and reviews
+    """
     companies = list(Company.query.all())
     reviews = list(Review.query.all())
     return render_template("view_companies.html", companies=companies, reviews=reviews)
@@ -22,6 +28,10 @@ def view_companies():
 # 1. Add a company
 @app.route("/add_company", methods=["GET", "POST"])
 def add_company():
+    """
+    GET: the company form
+    POST: the new addition to the view_companies page.
+    """
     if request.method == "POST":
         company = Company(service_name=request.form.get('service_name'))
         db.session.add(company)
@@ -33,6 +43,10 @@ def add_company():
 # 2.Edit a company
 @app.route("/edit_company/<int:company_id>", methods=["GET", "POST"])
 def edit_company(company_id):
+    """
+    GET: the edit-company form
+    POST: the changes to the view_companies page 
+    """
     company = Company.query.get_or_404(company_id)
     if request.method == "POST":
         company.service_name = request.form.get('service_name')
@@ -44,6 +58,9 @@ def edit_company(company_id):
 # 3. Delete a company
 @app.route("/delete_company/<int:company_id>")
 def delete_company(company_id):
+    """
+    Allows admin to delete a company. Note this will delete associated reviews.
+    """
     company = Company.query.get_or_404(company_id)
     db.session.delete(company)
     db.session.commit()
@@ -53,6 +70,10 @@ def delete_company(company_id):
 # 1. Add a review
 @app.route("/add_review", methods=["GET", "POST"])
 def add_review():
+    """
+    GET: the add_review form
+    POST: the new addition to the reviews page.
+    """
     companies = list(Company.query.all())
     if request.method == "POST":
         review = Review(
@@ -70,6 +91,10 @@ def add_review():
 # Edit a review
 @app.route("/edit_review/<int:review_id>", methods=["GET", "POST"])
 def edit_review(review_id):
+    """
+    GET: the edit-review form
+    POST: the changes to the reviews page 
+    """
     review = Review.query.get_or_404(review_id)
     companies = list(Company.query.all())
     if session["user"] == review.created_by:
@@ -89,6 +114,9 @@ def edit_review(review_id):
 # 3. Delete a review
 @app.route("/delete_review/<int:review_id>")
 def delete_review(review_id):
+    """
+    Allows users to delete their own review.
+    """
     review = Review.query.get_or_404(review_id)
     if session["user"] == review.created_by or session["user"] == "admin@gmail.com":
         db.session.delete(review)
@@ -105,6 +133,12 @@ def delete_review(review_id):
 # Register a user
 @app.route("/register_user", methods=["GET", "POST"])
 def register_user():
+    """
+    Registers a user;
+    1. 
+    2. 
+    3. 
+    """
     if request.method == "POST":
         # first check if they already registered
         existing_user = User.query.filter(
@@ -129,6 +163,9 @@ def register_user():
 # My account
 @app.route("/my_account/<username>")
 def my_account(username):
+    """
+    Routes the user to their own account with their own reviews on successful log in.
+    """
     is_admin = session['user'] == "admin@gmail.com"
     reviews = list(Review.query.filter_by(created_by=session['user']))
     return render_template("my_account.html", username=session["user"], reviews=reviews, is_admin_user=is_admin)
@@ -145,6 +182,9 @@ def my_account(username):
 # Log in
 @app.route("/login", methods=["GET", "POST"])
 def login():
+    """
+
+    """
     # Check user exists
     if request.method == "POST":
         existing_user = User.query.filter(
@@ -174,6 +214,9 @@ def login():
 # Logout
 @app.route("/logout")
 def logout():
+    """
+    Logs a user out and routes them back to the login page.
+    """
     session.pop("user")
     flash("You have been logged out")
     return redirect(url_for('login'))
@@ -182,11 +225,22 @@ def logout():
 # Send email
 @app.route('/contact_us')
 def contact_us():
+    """
+    Renders the email contact form page.
+    """
     return render_template("contact.html")
 
 # Error handling - page not found
-
-
 @app.errorhandler(404)
 def page_not_found(e):
+    """
+    Returns a 404 page with a button to guide back to the homepage.
+    """
     return render_template('404.html', title='404 - Page Not Found'), 404
+
+
+# # Search funcitonality
+# @app.route("/search")
+# def search():
+#     reviews = list(Review.query.all())
+#     return render_template("reviews.html", reviews=reviews)
