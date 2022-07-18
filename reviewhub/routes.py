@@ -160,15 +160,23 @@ def register_user():
     return render_template("register_user.html")
 
 
+def is_user_logged_in():
+    return 'user' in session
+
 # My account
 @app.route("/my_account/<username>")
 def my_account(username):
     """
     Routes the user to their own account with their own reviews on successful log in.
     """
+    if not is_user_logged_in():
+        return redirect(url_for('login'))
+        
     is_admin = session['user'] == "admin@gmail.com"
     reviews = list(Review.query.filter_by(created_by=session['user']))
     return render_template("my_account.html", username=session["user"], reviews=reviews, is_admin_user=is_admin)
+
+        
 
 
 # # My account
