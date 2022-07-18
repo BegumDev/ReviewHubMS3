@@ -1,20 +1,3 @@
-1. Purpose of the project
-2. user stories
-3. Features
-4. future features
-5. Typography and color scheme
-6. wireframes
-7. Technology
-8. testing
-   8.1 code validations
-   8.2 test cases (user story based with screenshots)
-   8.3 fixed bugs
-   8.4 supported screens and browsers
-9. Deployment
-   9.1 via gitpod
-   9.2 via github pages
-10. credits
-
 <h1 align="center">Review Hub</h1>
 
 [View the live project here](https://reviewhubbd.herokuapp.com/)
@@ -59,9 +42,9 @@
     * Main Page:
         1. View all reviews created by all users.
         2. Register a new account.
-        3. Login.
-        4. Contact the organisation.
-        5. Footer
+        3. Login ability for each users account.
+        4. Contact the organisation via an email form.
+        5. Footer - clickable external links to social media pages.
     * Register Page:
         1. Submit personal information and it will be stored on a database.
         2. Once details are logged it will route you to your own account page.
@@ -85,7 +68,7 @@
 * ### Future Features
     * Due to time constraints, the following features could not be added but will be enabled in the future;
         1. Edit own details and delete own account.
-        2. Search functionality.
+        2. Search functionality with filter options.
         3. Image incorporation for each review.
         
         
@@ -143,11 +126,10 @@
             1. When the user logs out, a flash message will appear at the top of the page confirming they are logged out.
         
 * ### Code validation.
-    1. Admin unable to delete reviews.
-        - Fix:
-            - Add to the line of code where; those who created the review can delete it - by enbaling the admin to do so aswell.
-    * 
-    * 
+    * HTML Validation
+    * CSS Validation
+    * JSHint Results
+    * PEP 8 Results
 
 * ### Supported screens and browsers.
     * 
@@ -156,10 +138,12 @@
     
 
 * ### Fixed bugs.
-    * 
-    * 
-    * 
-    
+    1. Admin unable to delete reviews.
+        - Fix:
+    2.  
+        - Fix:
+* ### Known bugs.
+    1. 
 
 
 ## Deployment
