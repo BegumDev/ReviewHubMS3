@@ -8,7 +8,8 @@ from reviewhub.models import User, Review, Company
 @app.route("/")
 def home():
     reviews = list(Review.query.all())
-    return render_template("reviews.html", reviews=reviews)
+    is_admin = session['user'] == "admin@gmail.com"
+    return render_template("reviews.html", reviews=reviews, is_admin_user=is_admin)
 
 
 # Companies page - View companies
@@ -92,9 +93,13 @@ def delete_review(review_id):
     if session["user"] == review.created_by or session["user"] == "admin@gmail.com":
         db.session.delete(review)
         db.session.commit()
+        if session["user"] == "admin@gmail.com":
+            return redirect(url_for('home'))
+        else:
+            return redirect(url_for('my_account', username=session["user"]))
     else:
         flash("You can only delete your own reviews")
-    return redirect(url_for('my_account', username=session["user"]))
+        return redirect(url_for('home'))
 
 
 # Register a user
@@ -124,15 +129,16 @@ def register_user():
 # My account
 @app.route("/my_account/<username>")
 def my_account(username):
-    is_admin = session['user'] == "admin@gmail.com" 
-    reviews = list(Review.query.filter(Review.created_by == session['user'] or is_admin))
+    is_admin = session['user'] == "admin@gmail.com"
+    reviews = list(Review.query.filter_by(created_by=session['user']))
     return render_template("my_account.html", username=session["user"], reviews=reviews, is_admin_user=is_admin)
+
 
 # # My account
 # @app.route("/my_account/<username>")
 # def my_account(username):
 #     reviews = list(Review.query.all())
-#     is_admin = session['user'] == "admin@gmail.com" 
+#     is_admin = session['user'] == "admin@gmail.com"
 #     return render_template("my_account.html", username=session["user"], reviews=reviews, is_admin_user=is_admin)
 
 
@@ -176,6 +182,8 @@ def contact_us():
     return render_template("contact.html")
 
 # Error handling - page not found
+
+
 @app.errorhandler(404)
 def page_not_found(e):
     return render_template('404.html', title='404 - Page Not Found'), 404

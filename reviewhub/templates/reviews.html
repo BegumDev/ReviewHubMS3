@@ -16,8 +16,8 @@
             <button class="open-reviews reviews-btn btn-large">See Reviews <i
                     class="fa-solid fa-turn-down"></i></button>
         </div> -->
-        <!-- Button to close the review -->
-        <!-- <div class="col s12 center-align">
+    <!-- Button to close the review -->
+    <!-- <div class="col s12 center-align">
             <button class="close-reviews reviews-btn btn-large">Close Reviews <i
                     class="fa-solid fa-turn-up"></i></button>
         </div>
@@ -33,6 +33,26 @@
                 <div class="card-content white-text">
                     <span class="card-title">{{ review.description }}</span>
                 </div>
+                {% if is_admin_user %}
+                <div class="col s12 card-action">
+                    <!-- Delete a review modal trigger -->
+                    <a class="waves-effect waves-light btn modal-trigger" href="#modal1{{ loop.index }}">Delete</a>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+        <!-- Modal popup to check if user wants to delete their review -->
+        <div id="modal1{{ loop.index }}" class="modal">
+            <div class="modal-content center-align">
+                <h4>Are you sure you want to delete?</h4>
+                <h5>WARNING: This review cannot be recovered!</h5>
+            </div>
+            <!-- Confirm deletion -->
+            <div class="modal-footer center-align">
+                <a href="{{ url_for('delete_review', review_id=review.id) }}"
+                    class="modal-close waves-effect waves-green btn red">YES</a>
+                <a href="{{ url_for('my_account', username=session['user']) }}"
+                    class="modal-close waves-effect waves-green btn">NO</a>
             </div>
         </div>
         {% endfor %}
@@ -46,7 +66,8 @@
             alt="Virgin Media Brand Logo">
     </div>
     <div class="col s6 m3 l2">
-        <img src="https://seekvectorlogo.com/wp-content/uploads/2018/01/sky-plc-vector-logo-small.png" alt="Sky Brand Logo">
+        <img src="https://seekvectorlogo.com/wp-content/uploads/2018/01/sky-plc-vector-logo-small.png"
+            alt="Sky Brand Logo">
     </div>
     <div class="col s6 m3 l2">
         <img src="https://www.scottishhousingnews.com/uploads/John%20Lewis.png" alt="John Lewis Brand Logo">
@@ -55,23 +76,24 @@
         <img src="https://pbs.twimg.com/profile_images/1543830184213860352/_X0qPYlF_400x400.jpg" alt="Tesco Brand Logo">
     </div>
     <div class="col s6 m3 l2">
-        <img src="https://d3hjzzsa8cr26l.cloudfront.net/c53a9aa6-2771-11e8-82b2-4797c13ab508.jpg" alt="British Gas Logo">
+        <img src="https://d3hjzzsa8cr26l.cloudfront.net/c53a9aa6-2771-11e8-82b2-4797c13ab508.jpg"
+            alt="British Gas Logo">
     </div>
     <div class="col s6 m3 l2">
         <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/cd/BT_logo_2019.svg/1200px-BT_logo_2019.svg.png"
-        alt="BT Brand Logo">
+            alt="BT Brand Logo">
     </div>
     <div class="col s6 m3 l2">
         <img src="https://www.ispreview.co.uk/wp-content/uploads/2020/07/nggallery_import/2_vodafone_uk_2016.png"
-        alt="Vodafone Brand Logo">
+            alt="Vodafone Brand Logo">
     </div>
     <div class="col s6 m3 l2">
         <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/1e/Aviva_Logo.svg/1200px-Aviva_Logo.svg.png"
-        alt="Aviva Brand Logo">
+            alt="Aviva Brand Logo">
     </div>
     <div class="col s6 m3 l2">
         <img src="https://upload.wikimedia.org/wikipedia/en/thumb/f/f4/Thomas_cook_globe_logo.svg/1200px-Thomas_cook_globe_logo.svg.png"
-        alt="Thomas Cook Brand Logo">
+            alt="Thomas Cook Brand Logo">
     </div>
     <div class="col s6 m3 l2">
         <img src="https://www.thejunctionshopping.com/wp-content/uploads/2017/03/Asda-1.png" alt="Asda Brand Logo">
