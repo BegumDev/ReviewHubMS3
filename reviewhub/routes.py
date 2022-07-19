@@ -207,7 +207,6 @@ def login():
                 if session["user"] == "admin@gmail.com":
                     return redirect(url_for('view_companies'))
                 else:
-                    flash('Sorry incorrect username/password')
                     return redirect(url_for('my_account', username=session["user"]))
             else:
                 print("password not found")
