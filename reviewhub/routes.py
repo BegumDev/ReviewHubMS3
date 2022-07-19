@@ -1,3 +1,6 @@
+"""
+Import modules
+"""
 from flask import render_template, url_for, redirect, request, session, flash
 from werkzeug.security import generate_password_hash, check_password_hash
 from reviewhub import app, db
@@ -22,7 +25,8 @@ def view_companies():
     """
     companies = list(Company.query.all())
     reviews = list(Review.query.all())
-    return render_template("view_companies.html", companies=companies, reviews=reviews)
+    return render_template(
+        "view_companies.html", companies=companies, reviews=reviews)
 
 
 # 1. Add a company
@@ -45,7 +49,7 @@ def add_company():
 def edit_company(company_id):
     """
     GET: the edit-company form
-    POST: the changes to the view_companies page 
+    POST: the changes to the view_companies page
     """
     company = Company.query.get_or_404(company_id)
     if request.method == "POST":
@@ -93,7 +97,7 @@ def add_review():
 def edit_review(review_id):
     """
     GET: the edit-review form
-    POST: the changes to the reviews page 
+    POST: the changes to the reviews page
     """
     review = Review.query.get_or_404(review_id)
     companies = list(Company.query.all())
@@ -135,9 +139,7 @@ def delete_review(review_id):
 def register_user():
     """
     Registers a user;
-    1. 
-    2. 
-    3. 
+
     """
     if request.method == "POST":
         # first check if they already registered
@@ -169,14 +171,14 @@ def is_user_logged_in():
 @app.route("/my_account/<username>")
 def my_account(username):
     """
-    Routes the user to their own account with their own reviews on successful log in.
+    Routes the user to their own account and own reviews on successful log in.
     """
     if not is_user_logged_in():
         return redirect(url_for('login'))
 
     is_admin = session['user'] == "admin@gmail.com"
     reviews = list(Review.query.filter_by(created_by=session['user']))
-    return render_template("my_account.html", username=session["user"], reviews=reviews, is_admin_user=is_admin)
+    return render_template("my_account.html", username=session["user"], name=username, reviews=reviews, is_admin_user=is_admin)
 
 
 # # My account
@@ -191,7 +193,7 @@ def my_account(username):
 @app.route("/login", methods=["GET", "POST"])
 def login():
     """
-
+    Enables users to log back into their account
     """
     # Check user exists
     if request.method == "POST":
@@ -246,19 +248,25 @@ def page_not_found(e):
     """
     Returns a 404 page with a button to guide back to the homepage.
     """
+    print(e)
     return render_template('404.html', title='404 - Page Not Found'), 404
 
 
 # Search funcitonality
 @app.route("/search", methods=["GET", "POST"])
 def search():
+    """
+    Allows users to search reviews using coompany name or description keywords
+    """
     if request.method == "POST":
         query = request.form.get('query')
+
         company_name = "%{}%".format(query)
         company_results = Review.query.filter(
             Review.company_name.like(company_name)).all()
-        search = "%{}%".format(query)
+
+        searched = "%{}%".format(query)
         description_results = Review.query.filter(
-            Review.description.like(search)).all()
+            Review.description.like(searched)).all()
 
     return render_template("search_results.html", description_results=description_results, query=query, company_results=company_results)

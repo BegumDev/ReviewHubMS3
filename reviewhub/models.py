@@ -1,8 +1,13 @@
+"""
+Import database
+"""
 from reviewhub import db
 
 
 class Company(db.Model):
-    # schema for the company name
+    """
+    schema for the company name
+    """
     id = db.Column(db.Integer, primary_key=True)
     service_name = db.Column(db.String(40), unique=True, nullable=False)
     reviews = db.relationship(
@@ -14,7 +19,9 @@ class Company(db.Model):
 
 
 class Review(db.Model):
-    # schema for the review
+    """
+    schema for the reviews
+    """
     id = db.Column(db.Integer, primary_key=True)
     company_name = db.Column(db.Text, nullable=False)
     description = db.Column(db.Text, nullable=False)
@@ -28,7 +35,9 @@ class Review(db.Model):
 
 
 class User(db.Model):
-    # schema for the User model
+    """
+    schema for the user details
+    """
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String, unique=True, nullable=False)
     password = db.Column(db.String, nullable=False)
@@ -36,4 +45,3 @@ class User(db.Model):
     def __repr__(self):
         # to represent itself as a string
         return self.username
-        return self.password
