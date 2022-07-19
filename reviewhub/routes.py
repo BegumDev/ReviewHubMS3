@@ -146,7 +146,7 @@ def register_user():
         if existing_user:
             print("user already exists")
             flash("Account already exists, please log in")
-            return redirect(url_for("register_user"))
+            return redirect(url_for("login"))
         # if not, add them
         user = User(
             username=request.form.get('username').lower(),
