@@ -171,12 +171,10 @@ def my_account(username):
     """
     if not is_user_logged_in():
         return redirect(url_for('login'))
-        
+
     is_admin = session['user'] == "admin@gmail.com"
     reviews = list(Review.query.filter_by(created_by=session['user']))
     return render_template("my_account.html", username=session["user"], reviews=reviews, is_admin_user=is_admin)
-
-        
 
 
 # # My account
@@ -197,7 +195,7 @@ def login():
     if request.method == "POST":
         existing_user = User.query.filter(
             User.username == request.form.get("username")
-        )
+        ).all()
         if existing_user:
             print("user found")
             # Check password
@@ -209,13 +207,15 @@ def login():
                 if session["user"] == "admin@gmail.com":
                     return redirect(url_for('view_companies'))
                 else:
+                    flash('Sorry incorrect username/password')
                     return redirect(url_for('my_account', username=session["user"]))
             else:
                 print("password not found")
+                flash('Sorry incorrect username/password')
                 return redirect(url_for('login'))
         else:
-            flash("User not found, please login")
-            return redirect(url_for("login"))
+            flash("User not found, please register")
+            return redirect(url_for('register_user'))
     return render_template('login.html')
 
 
