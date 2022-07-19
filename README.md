@@ -9,11 +9,16 @@
 ## User Experience (UX)
 ***
 - ### User stories
-    - #### Visitor goals:
+    - #### Registered User goals:
         1. I want to be able to log in and delete any of my reviews.
         2. I want to create my own reviews on the website.
         3. I want to be able to receive feedback on my progress when creating or deleting content.
-
+    - #### Unregistered User goals
+        1. I want to be able to contact the organisation.
+        2. I want to search general reviews without having to log in.
+    - #### Admin Goals
+        1. I want to be able to create, read, update and delete company categories.
+        2. I want to be able to delete any reviews.
 - ### Design
     * #### Color Scheme
         -  
@@ -87,43 +92,75 @@
     * Heroku.
         - Cloud platform for deploying the app.
 
-### Frameworks, Libraries & Programs Used
-* MaterialzeCSS.
-    - Used for responsiveness.
-* Flask.
-    - A web-framework app responsible to render templates.
-* Balsamiq
-    - Used to create wireframes of the website.
-* Jinja.
-    - Template language for python for easy creation of backend code through to the frintend.
-* Werkzeug Security.
-    - Used for password hashing and password authorisation.
+* ### Frameworks, Libraries & Programs Used
+    * MaterialzeCSS.
+        - Used for responsiveness.
+    * Flask.
+        - A web-framework app responsible to render templates.
+    * Balsamiq
+        - Used to create wireframes of the website.
+    * Jinja.
+        - Template language for python for easy creation of backend code through to the frintend.
+    * Werkzeug Security.
+        - Used for password hashing and password authorisation.
 
-### Database structure.
-* PostgreSQL.
-    - Storage for relational data to implement CRUD functionality.
+* ### Database structure.
+    * PostgreSQL.
+        - Storage for relational data to implement CRUD functionality.
 
 
 ## Testing
 ***
 * ### Testing user stories from user experience (UX).
-    * #### Aim 1 - I want to be able to log in and delete any of my reviews.
-        - Once a logged in, a user can;
-            1. Click on my account.
-            2. All their own reviews are visible on their account page.
-            3. Buttons are accessible to delete straight from the same page.
-            4. Once clicked a modal will pop up.
-            5. Clicking yes will confirm deletion and clicking no will cancel the deletion and route back to their account.
+    - Registered Users;
+        * #### Aim 1 - I want to be able to log in and delete any of my reviews.
+            - Result - Once a logged in, a user can;
+                1. Click on my account.
+                2. All their own reviews are visible on their account page.
+                3. Buttons are accessible to delete straight from the same page.
+                4. Once clicked a modal will pop up.
+                5. Clicking yes will confirm deletion and clicking no will cancel the deletion and route back to their account.
 
-    * #### Aim 2 -I want to create my own reviews on the website.
-        - Once a logged in, a user can;
-            1. Click on 'add a review' in their menu tab.
-            2. Users will be guided to a form to add a review.
-            3. Once filled out and submitted; the users review will pop up on the main website page aswell as their own.
-    
-    * #### Aim 3 - I want to be able to receive feedback on my progress when creating or deleting content.
-        - Logging out;
-            1. When the user logs out, a flash message will appear at the top of the page confirming they are logged out.
+        * #### Aim 2 -I want to create my own reviews on the website.
+            - Once a logged in, a user can;
+                1. Click on 'add a review' in their menu tab.
+                2. Users will be guided to a form to add a review.
+                3. Once filled out and submitted; the users review will pop up on the main website page aswell as their own.
+        
+        * #### Aim 3 - I want to be able to receive feedback on my progress when creating or deleting content.
+            - Logging out;
+                1. When the user logs out, a flash message will appear at the top of the page confirming they are logged out.
+    - Unregistered User goals
+        - #### Aim 1 - I want to be able to contact the organisation.
+            - Send an email;
+                1. Click on the 'contact us' page (accessible even whilst logged out).
+                2. Enter name in the name field.
+                3. Enter email address in the email field.
+                4. Type a message in the message field.
+                5. Click send.
+                6. If email is successfully sent, a message will populate at the top confirming this.
+                7. If the email doesn't send,  the flash message will notify them to try again.
+        - #### Aim 2 - I want to search general reviews without having to log in.
+            - Search reviews on the main page;
+                1. A search box appears on the main page without having to log in.
+                2. Type any descriptive keyword and the user will be guided to a results page displaying reviews that contain that keyword (using exact match).
+                3. Type any company name and the user will be guided to a results page displaying reviews that contain that company name (using exact match). 
+    - Admin Goals
+        - #### Aim 1 - I want to be able to create company categories.
+            - Add company category after logging in.
+                1. Admin needs to log in using the designated admin email.
+                2. They will be directed to the dashboard.
+                3. Click on 'add company.'
+                4. A form will populate and enter the name of the company category.
+                5. Click submit and the new data will appear on the dashbaord and available as a dropdown option when registered users add a review.
+
+        - #### Aim 1 - I want to be able to delete any reviews.
+            - Delete reviews;
+                1. Go to the admin dashboard and click on 'see reviews.'
+                2. All reviews will show and a delete button will appear per review.
+                3. Click delete and a modal will pop up to confirm the deletion.
+                4. Click yes to delete and it will delete and route you back to the dashboard.
+                5. Click no and it will ignore the deletion and route you back the dashboard.
         
 * ### Code validation.
     <details><summary>HTML Validation result:</summary>
