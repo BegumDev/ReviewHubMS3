@@ -33,6 +33,7 @@ section {
     padding-top: 200px;
 }
 
+
 .brands {
     width: 70%;
     height: auto;
@@ -93,6 +94,16 @@ section {
 
 /* Mobile screens */
 @media screen and (max-width: 425px) {
+
+    .review-hero{
+        height: auto;
+    }
+
+    .review-hero-text{
+        font-size: 40px;
+    }
+
+
     .brands img {
         width: 150px;
         height: 150px;
@@ -100,11 +111,14 @@ section {
 
     .brands {
         width: 100%;
-        margin-right: -20px;
+        margin-right: 0px;
     }
 
     .forms {
         width: 80%;
+    }
+    .forms, input{
+        width: 90%;
     }
 
     .flash-messages {

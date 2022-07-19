@@ -10,10 +10,10 @@
 
 <!-- Search box -->
 <div class="row">
-    <div class="col s8">
+    <div class="col s6 m8 l6 search-box">
         <form action="{{ url_for('search') }}" method="POST">
             <label for="query"><i class="fa-solid fa-magnifying-glass"></i> Search</label>
-            <input type="search" id="query" name="query" required>
+            <input type="search" id="query" name="query" placeholder="Search reviews here" required>
             <button class="submit btn">Search</button>
         </form>
     </div>
