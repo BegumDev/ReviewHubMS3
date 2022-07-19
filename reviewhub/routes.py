@@ -252,7 +252,9 @@ def page_not_found(e):
 def search():
     if request.method == "POST":
         query = request.form.get('query')
+        company_name = "%{}%".format(query)
+        company_results = Review.query.filter(Review.company_name.like(company_name)).all()
         search = "%{}%".format(query)
-        reviews = Review.query.filter(Review.description.like(search)).all()
+        description_results = Review.query.filter(Review.description.like(search)).all()
 
-    return render_template("search_results.html", reviews=reviews, query=query)
+    return render_template("search_results.html", description_results=description_results, query=query, company_results=company_results)
