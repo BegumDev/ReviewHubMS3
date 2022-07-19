@@ -237,9 +237,8 @@ def contact_us():
     """
     return render_template("contact.html")
 
+
 # Error handling - page not found
-
-
 @app.errorhandler(404)
 def page_not_found(e):
     """
@@ -248,8 +247,12 @@ def page_not_found(e):
     return render_template('404.html', title='404 - Page Not Found'), 404
 
 
-# # Search funcitonality
-# @app.route("/search")
-# def search():
-#     reviews = list(Review.query.all())
-#     return render_template("reviews.html", reviews=reviews)
+# Search funcitonality
+@app.route("/search", methods=["GET", "POST"])
+def search():
+    if request.method == "POST":
+        query = request.form.get('query')
+        search = "%{}%".format(query)
+        reviews = Review.query.filter(Review.description.like(search)).all()
+
+    return render_template("search_results.html", reviews=reviews, query=query)
