@@ -163,6 +163,9 @@ def register_user():
 
 
 def is_user_logged_in():
+    """
+    Checks if any user is logged in
+    """
     return 'user' in session
 
 # My account
@@ -178,15 +181,9 @@ def my_account(username):
 
     is_admin = session['user'] == "admin@gmail.com"
     reviews = list(Review.query.filter_by(created_by=session['user']))
-    return render_template("my_account.html", username=session["user"], name=username, reviews=reviews, is_admin_user=is_admin)
-
-
-# # My account
-# @app.route("/my_account/<username>")
-# def my_account(username):
-#     reviews = list(Review.query.all())
-#     is_admin = session['user'] == "admin@gmail.com"
-#     return render_template("my_account.html", username=session["user"], reviews=reviews, is_admin_user=is_admin)
+    return render_template(
+        "my_account.html", username=session["user"], name=
+        username, reviews=reviews, is_admin_user=is_admin)
 
 
 # Log in
@@ -269,4 +266,6 @@ def search():
         description_results = Review.query.filter(
             Review.description.like(searched)).all()
 
-    return render_template("search_results.html", description_results=description_results, query=query, company_results=company_results)
+    return render_template(
+        "search_results.html", description_results=
+        description_results, query=query, company_results=company_results)

@@ -170,10 +170,15 @@
 
     <details><summary>CSS Validation:</summary>
 
-    ![HTML Validation result](doc/images/css_validation.JPG)
+    ![CSS Validation result](doc/images/css_validation.JPG)
+    </details>
+
+    <details><summary>JSHint Validation:</summary>
+
+    ![JSHint Validation result](doc/images/jshint_validation.JPG)
     </details>
     
-    * JSHint Results
+
     * PEP 8 Results
 
 * ### Supported screens and browsers.
