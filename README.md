@@ -182,9 +182,9 @@
     * PEP 8 Results
 
 * ### Supported screens and browsers.
-    * 
-    * 
-    * 
+    * Mobiles
+    * Tablets
+    * Laptops
     
 
 * ### Fixed bugs.
