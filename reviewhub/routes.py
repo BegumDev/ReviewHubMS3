@@ -164,6 +164,8 @@ def is_user_logged_in():
     return 'user' in session
 
 # My account
+
+
 @app.route("/my_account/<username>")
 def my_account(username):
     """
@@ -253,8 +255,10 @@ def search():
     if request.method == "POST":
         query = request.form.get('query')
         company_name = "%{}%".format(query)
-        company_results = Review.query.filter(Review.company_name.like(company_name)).all()
+        company_results = Review.query.filter(
+            Review.company_name.like(company_name)).all()
         search = "%{}%".format(query)
-        description_results = Review.query.filter(Review.description.like(search)).all()
+        description_results = Review.query.filter(
+            Review.description.like(search)).all()
 
     return render_template("search_results.html", description_results=description_results, query=query, company_results=company_results)
