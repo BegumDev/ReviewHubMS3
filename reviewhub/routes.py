@@ -182,8 +182,7 @@ def my_account(username):
     is_admin = session['user'] == "admin@gmail.com"
     reviews = list(Review.query.filter_by(created_by=session['user']))
     return render_template(
-        "my_account.html", username=session["user"], name=
-        username, reviews=reviews, is_admin_user=is_admin)
+        "my_account.html", username=session["user"], name=username, reviews=reviews, is_admin_user=is_admin)
 
 
 # Log in

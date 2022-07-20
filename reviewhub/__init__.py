@@ -2,7 +2,7 @@ import os
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 if os.path.exists("env.py"):
-    import env # noqa
+    import env  # noqa
 
 app = Flask(__name__)
 app.config["SECRET_KEY"] = os.environ.get("SECRET_KEY")
@@ -16,4 +16,4 @@ else:
 
 db = SQLAlchemy(app)
 
-from reviewhub import routes #noqa
+from reviewhub import routes  # noqa
