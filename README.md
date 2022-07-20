@@ -106,8 +106,33 @@
 
 * ### Database structure.
     * PostgreSQL.
-        - Storage for relational data to implement CRUD functionality.
+        - Stores relational data to implement CRUD functionality.
+            <details><summary>View database schema here:</summary>
 
+            ![Database Schema](doc/images/db_structure.JPG)
+            </details>
+
+        - The database is structured into 3 models;
+            1. Company model - contains the company category types.
+                - How is it utilised?
+                    - Admin is the only one who can create a company category.
+                    - Each cateogry has a unique ID once created.
+                    - The company category is linked to the reviews. On deletion of a category - any reviews connected as a sub-cateogry will also be deleted.
+            2. Review model - users create reviews under the category contained in the Company model above.
+                - How is it utilised?
+                    - Any registered user can create a review.
+                    - Each review is put into a company category available as a drop down option. This is also the case for editing a review.
+                    - On deletion of a review, this will not affect the company category.
+            3. User model - registration details are stored here.
+                - How is it utilised?
+                    - Anyone can create an account using a username and a password.
+                    - Usernames are set to unique.
+                    - This username is linked to reviews through code in the routes file and adding reviews html files.
+                        1. The username is set to session user.
+                        2. The session user is fixed in the created_by field of the add_review.html form.
+                        3. This sends the session user as being the created_by value from the form and in the 'add_review' in the routes file.
+                        4. It now becomes the value in the 'created_by' column of the Review model.
+                        5. On editing and deleting reviews, this will not impact the company category.
 
 ## Testing
 ***
@@ -192,9 +217,11 @@
 
 * ### Fixed bugs.
     1. Admin unable to delete reviews.
-        - Fix:
-    2.  
-        - Fix:
+        - Fix: input a line of code in 'delete review' view such that those who created the review aswell as admin (admin email) cant delete the reviews.
+    2. The company category would populate when a user wants to edit a review.
+        - Fix: added an if/else statement to the edit_review form to check if the company is the same as the review company and if so; then to pre-populate it, else leave it with a choice.
+    3. The code broke when admin tried to delete a review from the main page.;
+        - Fix: centralise the management of reviews by taking the code form the reviews page and put into the admin dashboard page.
 * ### Known bugs.
     1. 
 
@@ -242,12 +269,16 @@
 ## Credits
 ***
 * ### Code
-
+    - Technical code
+    - Overall fundamental CRUD knowledge
 
 * ### Content
 
 
 * ### Media
+    - Image links
 
 
 * ### Acknowledgements
+    - Mentor
+    - Tutor Support
