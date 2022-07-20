@@ -229,6 +229,8 @@
 * ### Known errors.
     1. PEP8 error popped up with lines being too long. Once made short they would generate white space errors, once that was fixed, indentation errors popped up. With the consultation of tutor support we agreed a # noqa with the error codes ha dto be placed.
     2. The admin - has a redunandant 'my account' page which I could have just added some logic either in the routes files or the html such that if it is the admin user, the my account page would be away from view.
+    3. Footer is not sticky.
+    4. Review Model does not return all values in the statement.
 
 
 ## Deployment
