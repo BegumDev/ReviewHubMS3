@@ -130,6 +130,8 @@
                         3. This sends the session user as being the created_by value from the form and in the 'add_review' in the routes file.
                         4. It now becomes the value in the 'created_by' column of the Review model.
                         5. On editing and deleting reviews, this will not impact the company category.
+    * Issues faced
+        - I initially used MongoDB to store tasks and PostgreSQl to store user details to illustrate combined usage given that MongoDB can store more data that doesnt need to be linked. This proved more complicated than necessary as it was producing several bugs which I then decided with time constraints to redo the project with just PostgreSQL with all CRUD funtionality and user authentication still achievable.
 
 ## Testing
 ***
@@ -224,8 +226,9 @@
         - Fix: added an if/else statement to the edit_review form to check if the company is the same as the review company and if so; then to pre-populate it, else leave it with a choice.
     3. The code broke when admin tried to delete a review from the main page.;
         - Fix: centralise the management of reviews by taking the code form the reviews page and put into the admin dashboard page.
-* ### Known error.
+* ### Known errors.
     1. PEP8 error popped up with lines being too long. Once made short they would generate white space errors, once that was fixed, indentation errors popped up. With the consultation of tutor support we agreed a # noqa with the error codes ha dto be placed.
+    2. The admin - has a redunandant 'my account' page which I could have just added some logic either in the routes files or the html such that if it is the admin user, the my account page would be away from view.
 
 
 ## Deployment
