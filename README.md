@@ -2,7 +2,7 @@
 
 [View the live project here](https://reviewhubbd.herokuapp.com/)
 
-![Image of the website on desktop, laptop, tablet and mobile]
+![Image of the website on desktop, laptop, tablet and mobile](doc/images/amiresponsive.JPG)
 
 ### This project is a fictational reviews website to enable users to create, read, update and delete their reviews on one platform.
 
@@ -21,13 +21,10 @@
         2. I want to be able to delete any reviews.
 - ### Design
     * #### Color Scheme
-        -  
-    * #### Typography
-        - 
+        -  Grey and white.
+
     * #### Imagery
-        1. 
-        2. 
-        3. 
+        - The hero image on the main page is designed to draw attention using review stars to make it obvious what the site is about.
 
 - ### Wireframes
     <details><summary>Main Page Wireframe:</summary>
@@ -73,7 +70,7 @@
 * ### Future Features
     * Due to time constraints, the following features could not be added but will be enabled in the future;
         1. Edit own details and delete own account.
-        2. Search functionality with filter options.
+        2. Filter options within the search functionality.
         3. Image incorporation for each review.
         
         
@@ -203,8 +200,13 @@
     ![JSHint Validation result](doc/images/jshint_validation.JPG)
     </details>
     
+    <details><summary>PEP 8 Results:</summary>
 
-    * PEP 8 Results
+    ![PEP8 validation result](doc/images/routes.JPG)
+    ![PEP8 validation result](doc/images/models.JPG)
+    ![PEP8 validation result](doc/images/init.JPG)
+    ![PEP8 validation result](doc/images/run.JPG)
+    </details>
 
 * ### Supported screens and browsers.
     * Mobiles
@@ -222,8 +224,8 @@
         - Fix: added an if/else statement to the edit_review form to check if the company is the same as the review company and if so; then to pre-populate it, else leave it with a choice.
     3. The code broke when admin tried to delete a review from the main page.;
         - Fix: centralise the management of reviews by taking the code form the reviews page and put into the admin dashboard page.
-* ### Known bugs.
-    1. 
+* ### Known error.
+    1. PEP8 error popped up with lines being too long. Once made short they would generate white space errors, once that was fixed, indentation errors popped up. With the consultation of tutor support we agreed a # noqa with the error codes ha dto be placed.
 
 
 ## Deployment
@@ -269,16 +271,12 @@
 ## Credits
 ***
 * ### Code
-    - Technical code
     - Overall fundamental CRUD knowledge
-
-* ### Content
-
+        - The fundamental knowledge behind all CRUD functionality is inspired by Code Institutes Task Manager tutorial.
 
 * ### Media
-    - Image links
-
+    - Image links are within the HTML as taken from Google sources. None of the images are attributed as mine.
 
 * ### Acknowledgements
-    - Mentor
-    - Tutor Support
+    - Mentor - Rohit Sharma has been brilliant is advising of cleaner code (althoughI couldn't implement all his advice due to time constraints).
+    - Tutor Support - has been really helpful in guiding through any lack of understand in error or code logic.

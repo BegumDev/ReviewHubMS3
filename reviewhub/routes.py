@@ -122,7 +122,7 @@ def delete_review(review_id):
     Allows users to delete their own review.
     """
     review = Review.query.get_or_404(review_id)
-    if session["user"] == review.created_by or session["user"] == "admin@gmail.com":
+    if session["user"] == review.created_by or session["user"] == "admin@gmail.com":  # noqa ES501
         db.session.delete(review)
         db.session.commit()
         if session["user"] == "admin@gmail.com":
@@ -182,7 +182,8 @@ def my_account(username):
     is_admin = session['user'] == "admin@gmail.com"
     reviews = list(Review.query.filter_by(created_by=session['user']))
     return render_template(
-        "my_account.html", username=session["user"], name=username, reviews=reviews, is_admin_user=is_admin)
+        "my_account.html", username=session["user"], name=username,
+        reviews=reviews, is_admin_user=is_admin)
 
 
 # Log in
@@ -207,7 +208,8 @@ def login():
                 if session["user"] == "admin@gmail.com":
                     return redirect(url_for('view_companies'))
                 else:
-                    return redirect(url_for('my_account', username=session["user"]))
+                    return redirect(url_for('my_account',
+                    username=session["user"]))  # noqa E128
             else:
                 print("password not found")
                 flash('Sorry incorrect username/password')
@@ -266,5 +268,5 @@ def search():
             Review.description.like(searched)).all()
 
     return render_template(
-        "search_results.html", description_results=
-        description_results, query=query, company_results=company_results)
+        "search_results.html", description_results=description_results,
+        query=query, company_results=company_results)
