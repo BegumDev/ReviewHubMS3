@@ -21,12 +21,10 @@ function sendMail(contactForm) {
     .then(
         function(response) {
             console.log('Success', response);
-            console.log("email sent");
             emailSent();
             clearForm.reset();
         },
         function (error){
-            console.log("email has not sent");
             emailNotSent();
         }
     );

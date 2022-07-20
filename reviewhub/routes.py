@@ -146,7 +146,6 @@ def register_user():
         existing_user = User.query.filter(
             User.username == request.form.get("username")).all()
         if existing_user:
-            print("user already exists")
             flash("Account already exists, please log in")
             return redirect(url_for("login"))
         # if not, add them
@@ -198,12 +197,10 @@ def login():
             User.username == request.form.get("username")
         ).all()
         if existing_user:
-            print("user found")
             # Check password
             if check_password_hash(
                 existing_user[0].password, request.form.get("password")
             ):
-                print("password matches")
                 session["user"] = request.form.get("username").lower()
                 if session["user"] == "admin@gmail.com":
                     return redirect(url_for('view_companies'))
@@ -211,7 +208,6 @@ def login():
                     return redirect(url_for('my_account',
                     username=session["user"]))  # noqa E128
             else:
-                print("password not found")
                 flash('Sorry incorrect username/password')
                 return redirect(url_for('login'))
         else:
