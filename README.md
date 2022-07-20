@@ -183,8 +183,11 @@
 
 * ### Supported screens and browsers.
     * Mobiles
+        - Iphone 12 Pro, Iphone X, Iphone SE, Iphone XR , Samsung Galaxy S20 Ultra, Samsung Galaxy S20 Plus, Samsung Galaxy Note 9, Samsung SA51/71, Samsung Galaxy s9.
     * Tablets
+        - iPad Mini, iPad Air, iPad, iPad Pro, Samsung Tab S6
     * Laptops
+        - 15" - 17" screens
     
 
 * ### Fixed bugs.
