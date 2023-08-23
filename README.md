@@ -1,6 +1,6 @@
 <h1 align="center">Review Hub</h1>
 
-[View the live project here](https://reviewhubbd.herokuapp.com/)
+[View the live project here](https://reviewhubms3.onrender.com)
 
 ![Image of the website on desktop, laptop, tablet and mobile](doc/images/amiresponsive.JPG)
 
